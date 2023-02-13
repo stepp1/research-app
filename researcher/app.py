@@ -1,6 +1,6 @@
 import json
 import random
-from parser.utils import get_authors_str
+from researcher.parser.utils import get_authors_str
 
 import streamlit as st
 

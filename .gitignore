@@ -1,0 +1,13 @@
+data/
+models/
+notebooks/
+*.ipynb
+*.bin
+*.pkl
+*.csv
+*.json
+*.txt
+*.pt
+
+
+__pycache__/

@@ -1,4 +1,4 @@
-name: ml-papers
+name: researcher-app
 channels:
   - pytorch-nightly
   - nvidia
@@ -50,7 +50,7 @@ dependencies:
   - certifi=2022.12.7=pyhd8ed1ab_0
   - cffi=1.15.1=py310h255011f_3
   - charset-normalizer=2.1.1=pyhd8ed1ab_0
-  - click=8.1.3=unix_pyhd8ed1ab_2
+  # - click=8.1.3=unix_pyhd8ed1ab_2
   - colorama=0.4.6=pyhd8ed1ab_0
   - comm=0.1.2=pyhd8ed1ab_0
   - contourpy=1.0.7=py310hdf3cbec_0
@@ -274,7 +274,7 @@ dependencies:
   - pyqt=5.15.7=py310hab646b1_3
   - pyqt5-sip=12.11.0=py310heca2aa9_3
   - pyrsistent=0.19.3=py310h1fa729e_0
-  - pysocks=1.7.1=pyha2e5f31_6
+  # - pysocks=1.7.1=pyha2e5f31_6
   - python=3.10.9=he550d4f_0_cpython
   - python-dateutil=2.8.2=pyhd8ed1ab_0
   - python-fastjsonschema=2.16.2=pyhd8ed1ab_0

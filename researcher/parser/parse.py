@@ -6,9 +6,9 @@ from time import sleep
 from typing import Dict, List, Union
 
 import arxiv
-from extraction import PDFExtractor
-from scraper import serpapi_scrape_google_scholar_organic_results
-from utils import get_authors_str, is_parsed
+from researcher.parser.extraction import PDFExtractor
+from researcher.parser.scraper import serpapi_scrape_google_scholar_organic_results
+from researcher.parser.utils import get_authors_str, is_parsed
 
 # https://serpapi.com/
 api_key = "3549e959aaba6263113445e812dbc67dbf961422e5cfc9d109e28d9103d54be0"
