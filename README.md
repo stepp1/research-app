@@ -6,7 +6,14 @@ Author: @stepp1
 [Live Preview](https://stepp1-research-app-researcherapp-p7i4d2.streamlit.app/)
 
 # Table of Contents
+- [Status](#status)
 - [Installation](#installation)
+
+# Status
+1. What doesn't work
+  - Sidebar functionalities
+  - Title and Full Text embeddings
+  - Better Viz
 
 # Installation
 1. Clone the repository
