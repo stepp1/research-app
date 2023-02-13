@@ -1,5 +1,5 @@
 # Researcher App
-An app to organize your research for you: A Researcher with a Paper Based Approach
+An app that aims to organize your research: *A Researcher with a Paper Based Approach*
 
 Author: @stepp1
 
