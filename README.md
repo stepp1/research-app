@@ -11,7 +11,7 @@ Author: @stepp1
 - [Installation](#installation)
 
 # Status
-1. What doesn't work
+- TODOs:
   - Sidebar functionalities
   - Title and Full Text embeddings
   - Better Viz
