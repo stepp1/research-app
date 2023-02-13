@@ -6,9 +6,10 @@ from time import sleep
 from typing import Dict, List, Union
 
 import arxiv
-from researcher.parser.extraction import PDFExtractor
-from researcher.parser.scraper import serpapi_scrape_google_scholar_organic_results
-from researcher.parser.utils import get_authors_str, is_parsed
+from extraction import PDFExtractor
+from fuzzywuzzy import fuzz
+from scraper import serpapi_scrape_google_scholar_organic_results
+from utils import get_authors_str, is_parsed
 
 # https://serpapi.com/
 api_key = "3549e959aaba6263113445e812dbc67dbf961422e5cfc9d109e28d9103d54be0"
@@ -20,6 +21,48 @@ logging.basicConfig(
     format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO
 )
 
+def arxiv_search(query: str):
+    logging.info(f"Querying arxiv with = {query}")
+    query_results = arxiv.Search(
+        query=query,
+        max_results=1,
+    )
+    for result in query_results.results():
+        paper_id            = result.get_short_id()
+        paper_title         = result.title
+        paper_url           = result.entry_id
+        paper_abstract      = result.summary.replace("\n"," ")
+        paper_authors       = result.authors
+        paper_first_author  = get_authors_str(result.authors,first_author = True)
+        primary_category    = result.primary_category
+        publish_time        = result.published.date()
+        update_time         = result.updated.date()
+        comments            = result.comment
+
+    return paper_title, paper_url, paper_authors, paper_first_author, paper_abstract
+
+def serpapi_search(query: str):
+    logging.info(f"Querying G.Scholar using serpapi with = {query}")
+    result = serpapi_scrape_google_scholar_organic_results(
+        query=query,
+        api_key=api_key,
+        lang="en",
+    )[0]
+
+    if "arxiv" in result["link"]:
+        logging.info(f"Found arxiv link: {result['link']}")
+        arvix_id =  result["link"].split("/")[-1]
+        return arxiv_search(arvix_id)
+
+    else:
+        paper_title = result["title"]
+        paper_url = result["link"]
+        paper_authors = [author["name"] for author in result["publication_info"]["authors"]]
+        paper_first_author = get_authors_str(paper_authors, first_author = True)
+        paper_abstract = result["snippet"]
+
+    return paper_title, paper_url, paper_authors, paper_first_author, paper_abstract
+
 
 def get_paper_metadata(title: str, next_line: str = "") -> Dict[str, Union[str, List[str]]]:
     """
@@ -30,42 +73,20 @@ def get_paper_metadata(title: str, next_line: str = "") -> Dict[str, Union[str, 
 
     :return: a dictionary with the keys "title", "url", and "authors"
     """
+    query = title + " " + next_line
 
     if not use_serpapi:
-        query = title + " " + next_line
-        logging.info(f"Querying arxiv with = {query}")
-        query_results = arxiv.Search(
-            query=query,
-            max_results=1,
-        )
-        for result in query_results.results():
-            paper_id            = result.get_short_id()
-            paper_title         = result.title
-            paper_url           = result.entry_id
-            paper_abstract      = result.summary.replace("\n"," ")
-            paper_authors       = result.authors
-            paper_first_author  = get_authors_str(result.authors,first_author = True)
-            primary_category    = result.primary_category
-            publish_time        = result.published.date()
-            update_time         = result.updated.date()
-            comments            = result.comment
+        paper_title, paper_url, paper_authors, paper_first_author, paper_abstract = arxiv_search(query)
 
-        
     else:
-        logging.info(f"Querying G.Scholar with = {title}")
-        result = serpapi_scrape_google_scholar_organic_results(
-            query=title,
-            api_key=api_key,
-            lang="en",
-        )[0]
-
-        paper_title = result["title"]
-        paper_url = result["link"]
-        paper_authors = [author["name"] for author in result["publication_info"]["authors"]]
-        paper_first_author = get_authors_str(paper_authors, first_author = True)
+        paper_title, paper_url, paper_authors, paper_first_author, paper_abstract = serpapi_search(query)
+        
+    if fuzz.ratio(title, paper_title) < 60:
+        logging.warning("Title mismatch {} vs {}".format(title, paper_title))
+        paper_title, paper_url, paper_authors, paper_first_author, paper_abstract = serpapi_search(query)
 
     logging.info(f"Title: {str(paper_title)}, URL: {str(paper_url)}, Authors: {get_authors_str(paper_authors)}")
-
+    
     out_dict = {
         "title": paper_title,
         "url": paper_url,
@@ -94,11 +115,15 @@ def extract_paper(pdf_path: str, out_file: str) -> Union[None, Dict[str, Union[s
     extractor = PDFExtractor(pdf_path)
 
     title, next_line = extractor.extract()
-                        
-    result = get_paper_metadata(title.lower(), next_line=next_line.lower())
-    result["file"] = str(pdf_path)
+    try:
+        result = get_paper_metadata(title.lower(), next_line=next_line.lower())
+        result["file"] = str(pdf_path)
+        logging.info(f"Confirmed")
 
-    logging.info(f"Confirmed")
+    except Exception as e:
+        result = None
+        logging.error(f"Error: {e}")
+        
     return result
 
 
@@ -116,7 +141,8 @@ def parse_dir(dir_path: str, out_file: str) -> List[Dict[str, Union[str, List[st
     for file in Path(dir_path).iterdir():
         if file.suffix == ".pdf":
             paper = extract_paper(file, out_file)
-            papers.append(paper)
+            if paper is not None:
+                papers.append(paper)
 
         sleep(2)
     return papers
@@ -146,9 +172,12 @@ def parser(path: str, is_file: bool = False, is_dir: bool = False) -> Union[None
 
     # add result to the json file if it exists
     if Path(current_out_file).exists():
-        with open(current_out_file, "rw") as f:
+        with open(current_out_file) as f:
             result_json = json.load(f)
-            result_json.extend(result)
+
+        result_json = result_json + result
+
+        with open(current_out_file, "w") as f:
             json.dump(result_json, f, indent=4)
     else:        
         with open(current_out_file, "w") as f:

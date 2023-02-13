@@ -1,8 +1,9 @@
 import json
 import random
-from researcher.parser.utils import get_authors_str
+from parser.utils import get_authors_str
 
 import streamlit as st
+from viz import visualization_plotly
 
 st.set_page_config(layout="wide")
 random.seed(42)
@@ -10,8 +11,8 @@ random.seed(42)
 st.title("Machine Learning Research: A Paper based Approach")
 
 data_source = st.selectbox(
-    "Data Source",
-    ["Title", "Abstract", "Full Text"],
+    "Data Source (Currently only Abstracts are supported)",
+    ["Abstract"], # ["Title", "Abstract", "Full Text"],
     help = "Choose the data source for the pipeline",
     format_func=lambda x: x.title()
 )
@@ -79,14 +80,47 @@ with st.sidebar:
 # add two tabs
 tab1, tab2 = st.tabs(["📈 Visualization", "🗃 Data"])
 
+with open("researcher/out/result.json", "r") as f:
+        papers = json.load(f)
+
 with tab1:
     st.subheader("Paper Explorer")
+    import random
+
+    from InstructorEmbedding import INSTRUCTOR
+    from sklearn import cluster
+    
+    random.seed(42)
+    model = INSTRUCTOR('hkunlp/instructor-large')
+    
+
+    
+
+    instruction = 'Represent these paper abstracts for clustering: '
+    sentences = [[instruction, paper["abstract"]] for paper in papers]
+    embeddings = model.encode(sentences)
+
+    clustering_model = cluster.KMeans(
+        n_clusters=2, 
+        random_state=42, 
+        n_init=10, 
+        verbose=0
+    )
+    clustering_model.fit(embeddings)
+    cluster_assignment = clustering_model.labels_
+
+    fig = visualization_plotly(
+        embeddings=embeddings, 
+        labels=[paper["title"] for paper in papers], 
+        cluster_assignment=cluster_assignment, 
+        method="umap"
+    )
+
+    st.plotly_chart(fig)
 
 with tab2:
     st.subheader("Current Papers")
 
-    with open("out/result.json", "r") as f:
-        papers = json.load(f)
     for paper in papers:
         exp = st.expander(paper["title"])
         authors = get_authors_str(paper["authors"])

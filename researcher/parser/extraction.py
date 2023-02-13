@@ -5,7 +5,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfinterp import PDFPageInterpreter, PDFResourceManager
 from pdfminer.pdfpage import PDFPage
-from researcher.parser.utils import check_publisher, is_complete, process_ascii
+from utils import check_publisher, is_complete, process_ascii
 
 
 class PDFExtractor:
