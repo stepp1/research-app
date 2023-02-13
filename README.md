@@ -3,7 +3,7 @@ An app that aims to organize your research: *A Researcher with a Paper Based App
 
 Author: @stepp1
 
-[Live Preview](https://stepp1-research-app-researcherapp-p7i4d2.streamlit.app/)
+[Live Preview]([https://stepp1-research-app-researcherapp-p7i4d2.streamlit.app/](https://huggingface.co/spaces/stepp1/researcher-app))
 
 # Table of Contents
 - [Status](#status)
