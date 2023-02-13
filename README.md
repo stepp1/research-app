@@ -29,3 +29,7 @@ streamlit run researcher/app.py
 
 Remember to forward the port for streamlit if you are running it on a server!
 
+# Data
+
+* PDFs should be stored at researcher/data
+* Metadata should be stored at researcher/out/result.json
