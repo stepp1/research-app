@@ -127,28 +127,8 @@
             "Y Gal"
         ],
         "abstract": "Recently proposed methods in data subset selection, that is active learning and active sampling, use Fisher information, Hessians, similarity matrices based on gradients, and gradient lengths to estimate how informative data is for a model's training. Are these different approaches connected, and if so, how? We revisit the fundamentals of Bayesian optimal experiment design and show that these recently proposed methods can be understood as approximations to information-theoretic quantities: among them, the mutual information \u2026",
-        "file": "data/2208.00549v2.Unifying_Approaches_in_Active_Learning_and_Active_Sampling_via_Fisher_Information_and_Information_Theoretic_Quantities.pdf"
-    },
-    {
-        "title": "Unifying Approaches in Active Learning and Active Sampling via Fisher Information and Information-Theoretic Quantities",
-        "url": "https://openreview.net/forum?id=UVDAKQANOW",
-        "authors": [
-            "A Kirsch",
-            "Y Gal"
-        ],
-        "abstract": "Recently proposed methods in data subset selection, that is active learning and active sampling, use Fisher information, Hessians, similarity matrices based on gradients, and gradient lengths to estimate how informative data is for a model's training. Are these different approaches connected, and if so, how? We revisit the fundamentals of Bayesian optimal experiment design and show that these recently proposed methods can be understood as approximations to information-theoretic quantities: among them, the mutual information \u2026",
-        "file": "data/2208.00549.pdf"
-    },
-    {
-        "title": "A survey on Bayesian network structure learning from data",
-        "url": "https://link.springer.com/article/10.1007/s13748-019-00194-y",
-        "authors": [
-            "M Scanagatta",
-            "A Salmer\u00f3n",
-            "F Stella"
-        ],
-        "abstract": "\u2026 In this survey, we review the most relevant structure learning algorithms that have been proposed in the literature. We \u2026 An extensive review of existing software tools is also given. \u2026",
-        "file": "data/2109.11415.pdf"
+        "file": "data/2208.00549.pdf",
+        "comments": "https://openreview.net/forum?id=UVDAKQANOW"
     },
     {
         "title": "Representation Learning with Diffusion Models",
