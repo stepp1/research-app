@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import plotly.express as px
+from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from umap import UMAP
 
@@ -22,10 +23,19 @@ def decompose_umap(embeddings):
 
     return new_values
 
+def decompose_pca(embeddings):
+    "Creates and TSNE model and plots it"
+
+    pca_model = PCA(n_components=2, random_state=42)
+    new_values = pca_model.fit_transform(embeddings)
+
+    return new_values
+
 
 decompose_funcs = {    
     "tsne": decompose_tsne,
-    "umap": decompose_umap
+    "umap": decompose_umap,
+    "pca" : decompose_pca
 }
 
 
@@ -52,7 +62,7 @@ def visualization_plt(embeddings, labels, method="tsne"):
 
     return f
 
-def visualization_plotly(embeddings, labels, cluster_assignment=None, method="tsne"):
+def visualization_plotly(embeddings, labels, cluster_assignment=None, method="tsne", show_legend=True, show_=False):
     decompose = decompose_funcs[method]
     new_values = decompose(embeddings)
 
@@ -70,9 +80,9 @@ def visualization_plotly(embeddings, labels, cluster_assignment=None, method="ts
     fig.update_yaxes(showticklabels=False, visible=False)
 
 
-    fig.update_layout(showlegend=False)
+    fig.update_layout(showlegend=show_legend)
 
     fig.update_layout(title="Visualization of Abstract's", height=500, width=1000)
-    fig.show()
+    if show_: fig.show()
 
     return fig
