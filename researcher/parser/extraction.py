@@ -1,11 +1,11 @@
 import io
 import logging
+from parser.utils import check_publisher, is_complete, process_ascii
 
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfinterp import PDFPageInterpreter, PDFResourceManager
 from pdfminer.pdfpage import PDFPage
-from utils import check_publisher, is_complete, process_ascii
 
 
 class PDFExtractor:
