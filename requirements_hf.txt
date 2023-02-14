@@ -1,0 +1,13 @@
+plotly
+arxiv 
+google-search-results 
+selenium 
+selectolax 
+selenium-stealth 
+InstructorEmbedding 
+python-Levenshtein 
+fuzzywuzzy
+scikit-learn
+umap-learn
+torch
+sentence-transformers
