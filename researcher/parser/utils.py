@@ -1,6 +1,7 @@
 import json
 import logging
 from pathlib import Path
+from typing import Dict, List
 
 #TODO: support pagination using `async` parameter
 
@@ -76,3 +77,15 @@ def is_parsed(pdf_path, out_file):
             if paper["file"] == str(pdf_path):
                 logging.info(f"Paper already extracted")
                 return True
+
+def add_to_json(new_result: List[Dict], current_out_file: str):
+    # add result to the json file if it exists
+    with open(current_out_file) as f:
+        results = json.load(f)
+
+    results = results + new_result
+
+    with open(current_out_file, "w") as f:
+        json.dump(results, f, indent=4)
+
+    return results

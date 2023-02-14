@@ -9,7 +9,7 @@ import arxiv
 from extraction import PDFExtractor
 from fuzzywuzzy import fuzz
 from scraper import serpapi_scrape_google_scholar_organic_results
-from utils import get_authors_str, is_parsed
+from utils import add_to_json, get_authors_str, is_parsed
 
 # https://serpapi.com/
 api_key = "3549e959aaba6263113445e812dbc67dbf961422e5cfc9d109e28d9103d54be0"
@@ -170,20 +170,14 @@ def parser(path: str, is_file: bool = False, is_dir: bool = False) -> Union[None
         result = parse_dir(path, current_out_file)
 
 
-    # add result to the json file if it exists
     if Path(current_out_file).exists():
-        with open(current_out_file) as f:
-            result_json = json.load(f)
-
-        result_json = result_json + result
-
-        with open(current_out_file, "w") as f:
-            json.dump(result_json, f, indent=4)
+        add_to_json(result, current_out_file)
     else:        
         with open(current_out_file, "w") as f:
             json.dump(result, f, indent=4)
 
     return result
+
 
 def main(args) -> None:
     """Main function to parse the pdf file or directory path
