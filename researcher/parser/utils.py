@@ -79,6 +79,10 @@ def is_parsed(pdf_path, out_file):
                 return True
 
 def add_to_json(new_result: List[Dict], current_out_file: str):
+    # check if file exists
+    if not Path(current_out_file).exists():
+        raise FileNotFoundError(f"File {current_out_file} does not exist")
+
     # add result to the json file if it exists
     with open(current_out_file) as f:
         results = json.load(f)
