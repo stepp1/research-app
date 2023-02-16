@@ -1,11 +1,16 @@
 import json
 import random
-from parser.parse import extract_paper
-from parser.utils import add_to_json, get_authors_str
 
 import streamlit as st
-from embeddings import instructor_encode, kmeans_embeddings, load_model
-from viz import visualization_plotly
+
+from researcher import (
+    extract_paper,
+    instructor_encode,
+    kmeans_embeddings,
+    load_model,
+    visualization_plotly,
+)
+from researcher.parser.utils import add_to_json, get_authors_str
 
 st.set_page_config(layout="wide")
 random.seed(42)
@@ -22,6 +27,7 @@ if data_source == "Abstract":
     current_out_file = "researcher/out/result.json"
 else:
     current_out_file = "researcher/out/result.json"
+
 
 with st.sidebar:
     with st.expander("Want to add a new Paper?"):
@@ -68,7 +74,8 @@ with st.sidebar:
     with st.expander("Embeddings", False):
         mod = st.selectbox(
             "Embedding Algorithm", 
-            ["tf-idf","Hash","Count","SentenceTransformers Model","Universal Sentence Encoder"], 
+            # ["tf-idf","Hash","Count","SentenceTransformers Model","Universal Sentence Encoder"], 
+            ["Instructor Embeddings", "GPT Embeddings"],
             help = "Algorithm used for sentence embeddings, preprocessing steps may be duplicated between the abova and the following models"
         )
 
@@ -102,7 +109,6 @@ with st.sidebar:
             ["K-Means","DBSCAN","Agglomerative Clustering"],
             help = "Algorithm used to cluster the embeddings"
         )
-
         
         if mod == "K-Means":
             cluster_method = "kmeans"
@@ -118,7 +124,7 @@ with st.sidebar:
             linkage = st.selectbox("linkage", ["ward","complete","average","single"], help = "Which linkage criterion to use")
 
 
-            
+
 tab1, tab2 = st.tabs(["📈 Visualization", "🗃 Data"])
 
 with open(current_out_file, "r") as f:
@@ -129,7 +135,7 @@ with tab1:
 
     abstracts = [paper["abstract"] for paper in papers]
     model = load_model()
-    embeddings = instructor_encode(model, abstracts, clustering=True)
+    embeddings = instructor_encode(model, abstracts, clustering=False)
     cluster_assignment = kmeans_embeddings(embeddings, n_clusters)
 
     fig = visualization_plotly(
@@ -157,7 +163,8 @@ with tab2:
         else:
             current_col = col3
         
-        current_col.write(f"**{paper['title']}**")
-        current_col.write(f"Authors: {get_authors_str(paper['authors'])}")
-        current_col.write(f"Abstract: {paper['abstract']}")
-        current_col.write(f"Link: {paper['url']}")
+        with current_col.expander(f"**{paper['title']}**", False):
+            st.markdown(f"* Authors: {get_authors_str(paper['authors'])}")
+            st.markdown(f"* Abstract: {paper['abstract']}")
+            st.markdown(f"* Link: {paper['url']}")
+            st.markdown(" ")
