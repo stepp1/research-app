@@ -1,11 +1,12 @@
 import io
 import logging
-from parser.utils import check_publisher, is_complete, process_ascii
 
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfinterp import PDFPageInterpreter, PDFResourceManager
 from pdfminer.pdfpage import PDFPage
+
+from researcher.parser.utils import check_publisher, is_complete, process_ascii
 
 
 class PDFExtractor:
@@ -53,45 +54,3 @@ class PDFExtractor:
         self.device.close()
         self.outfp.close()
         return self.title, self.next_line
-
-
-# def get_paper_meta():
-#     for page in PDFPage.get_pages(fh, pagenos, caching=True, check_extractable=True):
-#             interpreter.process_page(page)
-#             text = outfp.getvalue()
-
-#             for i, line in enumerate(text.splitlines()):
-#                 if len(line) > 2 and not check_publisher(line):
-#                     line = process_ascii(line)
-                    
-#                     if is_complete(line) and title_line == -1:
-#                         title_line = i
-#                         title += line
-#                         logging.info(f"Possible title: {title}")
-#                         continue
-                    
-#                     if title_line != -1 and len(line) > 2:
-#                         next_line += line
-#                         logging.info(f"Next line: {next_line}")
-#                         break
-#             break
-
-# def extract_pdf(pdf_path):
-#     pagenos = set()
-#     rsrcmgr = PDFResourceManager(caching=True)
-#     outfp = sys.stdout if False else io.StringIO()
-#     laparams = LAParams()
-#     device = TextConverter(rsrcmgr, outfp, laparams=laparams)
-
-#     title = ""
-#     title_line = -1
-
-#     next_line = ""
-#     
-#     
-
-        
-
-#     device.close()
-#     outfp.close()
-#     return title, next_line

@@ -67,19 +67,19 @@ def is_complete(line):
 
 def is_parsed(pdf_path, out_file):
     # check if the out_file exists
-    if not Path(out_file).exists():
-        return False
-
-    # check pdf_path is already in the out_file
-    with open(out_file, "r") as f:
-        result_json = json.load(f)
+    results_exist = Path(out_file).exists()
+    if results_exist:
+        # check pdf_path is already in the out_file
+        result_json = json.load(open(out_file, "r"))
         for paper in result_json:
             if paper["file"] == str(pdf_path):
                 logging.info(f"Paper already extracted")
                 return True
+    return False
 
 def add_to_json(new_result: List[Dict], current_out_file: str):
     # check if file exists
+    print(current_out_file, Path(current_out_file).exists())
     if not Path(current_out_file).exists():
         raise FileNotFoundError(f"File {current_out_file} does not exist")
 
