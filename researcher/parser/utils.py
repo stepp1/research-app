@@ -3,7 +3,8 @@ import logging
 from pathlib import Path
 from typing import Dict, List
 
-#TODO: support pagination using `async` parameter
+# TODO: support pagination using `async` parameter
+
 
 def process_ascii(ascii_text):
     ascii_text = ascii_text.replace("c¸", "ç")
@@ -13,7 +14,8 @@ def process_ascii(ascii_text):
 
     return ascii_text
 
-def get_authors_str(authors, first_author = False):
+
+def get_authors_str(authors, first_author=False):
     output = str()
     if first_author == False:
         output = ", ".join(str(author) for author in authors)
@@ -21,15 +23,36 @@ def get_authors_str(authors, first_author = False):
         output = authors[0]
     return output
 
+
 def check_publisher(text):
-    if "Published in" in text:
+    text = text.lower()
+    if "published" in text:
         return True
-    if "Publisher" in text:
+    if "publisher" in text:
         return True
-    if "ICLR" in text:
+    if "iclr" in text:
         return True
-    if "International Conference on Learning Representations" in text:
+    if "international conference on learning representations" in text:
         return True
+    if "http" in text:
+        return True
+    if "journal" in text:
+        return True
+    if "doi" in text:
+        return True
+    if "arxiv" in text:
+        return True
+    if "society" in text:
+        return True
+    if "copyright" in text:
+        return True
+    if "p." in text:
+        return True
+    if "pp." in text:
+        return True
+    if "vol." in text:
+        return True
+
 
 def is_complete(line):
     if line.endswith("."):
@@ -65,6 +88,7 @@ def is_complete(line):
     else:
         return True
 
+
 def is_parsed(pdf_path, out_file):
     # check if the out_file exists
     results_exist = Path(out_file).exists()
@@ -76,6 +100,7 @@ def is_parsed(pdf_path, out_file):
                 logging.info(f"Paper already extracted")
                 return True
     return False
+
 
 def add_to_json(new_result: List[Dict], current_out_file: str):
     # check if file exists

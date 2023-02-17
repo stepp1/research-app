@@ -66,6 +66,15 @@ def serpapi_search(query: str):
         lang="en",
     )[0]
 
+    if fuzz.ratio(result["title"], query) < 65:
+        logging.info(f"Querying G.Scholar using serpapi with = {query}")
+        result = serpapi_scrape_google_scholar_organic_results(
+            query=query,
+            api_key=api_key,
+            lang="en",
+        )[0]
+
+    print(result)
     if "arxiv" in result["link"]:
         logging.info(f"Found arxiv link: {result['link']}")
         arxiv_id = result["link"].split("/")[-1]
@@ -74,10 +83,15 @@ def serpapi_search(query: str):
     else:
         paper_title = result["title"]
         paper_url = result["link"]
-        paper_authors = [
-            author["name"] for author in result["publication_info"]["authors"]
-        ]
-        paper_first_author = get_authors_str(paper_authors, first_author=True)
+        try:
+            paper_authors = [
+                author["name"] for author in result["publication_info"]["authors"]
+            ]
+
+            paper_first_author = get_authors_str(paper_authors, first_author=True)
+        except KeyError:
+            paper_authors = [""]
+            paper_first_author = ""
         paper_abstract = result["snippet"]
 
     paper = {
