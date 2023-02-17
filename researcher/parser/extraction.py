@@ -24,20 +24,22 @@ class PDFExtractor:
         self.next_line = ""
 
     def get_metadata(self):
-        for page in PDFPage.get_pages(self.current_fh, self.pagenos, caching=True, check_extractable=True):
+        for page in PDFPage.get_pages(
+            self.current_fh, self.pagenos, caching=True, check_extractable=True
+        ):
             self.interpreter.process_page(page)
             text = self.outfp.getvalue()
 
             for i, line in enumerate(text.splitlines()):
                 if len(line) > 2 and not check_publisher(line):
                     line = process_ascii(line)
-                    
-                    if is_complete(line) and self.title_line == -1:
+
+                    if is_complete(line) and self.title_line == -1 and len(line) > 3:
                         self.title_line = i
                         self.title += line
                         logging.info(f"Possible title: {self.title}")
                         continue
-                    
+
                     if self.title_line != -1 and len(line) > 2:
                         self.next_line += line
                         logging.info(f"Next line: {self.next_line}")
@@ -48,7 +50,7 @@ class PDFExtractor:
         with open(self.pdf_path, "rb") as fh:
             self.current_fh = fh
             self.interpreter = PDFPageInterpreter(self.rsrcmgr, self.device)
-            
+
             self.get_metadata()
 
         self.device.close()
