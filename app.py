@@ -240,7 +240,18 @@ with st.sidebar:
         )
         data["cluster_assignment"] = cluster_assignment.tolist()
 
-tab1, tab2 = st.tabs(["📈 Visualization", "🗃 Data"])
+
+font_css = """
+<style>
+button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
+  font-size: 20px;
+}
+</style>
+"""
+
+st.write(font_css, unsafe_allow_html=True)
+
+tab1, tab2 = st.tabs(["📈 Visualization", "🗃 Papers"])
 
 with tab1:
     st.subheader("Paper Explorer")
