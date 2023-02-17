@@ -13,3 +13,4 @@ utils/
 
 
 __pycache__/
+.env
