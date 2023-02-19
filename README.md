@@ -12,7 +12,6 @@ Author: @stepp1
 
 # Status
 - TODOs:
-  - Sidebar functionalities
   - Title and Full Text embeddings
   - Better Viz
 
@@ -34,12 +33,46 @@ conda activate researcher-app
 
 4. Run the app
 ```bash
-streamlit run researcher/app.py
+streamlit run app.py
 ```
 
 Remember to forward the port for streamlit if you are running it on a server!
 
-# Data
+# Dataset
 
-* PDFs should be stored at `researcher/data`
-* Metadata should be stored at `researcher/out/result.json`
+Data is sourced from PDFs of different papers stored in `researcher/data/pdf/`.
+
+Also, we provide a `dataset.json` file stored at `researcher/data/` that contains the metadata of the papers:
+    - `title`: title of the paper
+    - `authors`: list of authors
+    - `abstract`: abstract of the paper
+    - `url`: url of the paper
+    - `file`: path to the PDF file
+    - `images`: path to the images extracted from the PDF file
+
+As distributing the PDF files is quite cumbersome, we provide a script to download the `dataset.json` file and the images from the PDF files.
+
+Data is currently hosted on Zenodo: https://zenodo.org/record/7653458
+
+## Download the dataset
+
+- Download the `dataset.json` file only:
+```bash
+curl -L https://zenodo.org/record/7653458/files/dataset.json -o researcher/data/dataset.json
+``` 
+
+- Download the `dataset.json` file and the images:
+```bash
+curl -L https://zenodo.org/record/7653458/files/data.tar.xz | tar -xJ -C researcher/data/
+```
+
+## Download the PDF files
+
+> TODO
+We provide a script to download the PDF files from the `dataset.json` file.
+
+```bash
+python utils/download_pdfs.py
+```
+
+
