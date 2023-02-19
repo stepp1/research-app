@@ -1,7 +1,7 @@
 # Researcher App
 An app that aims to organize your research: *A Researcher with a Paper Based Approach*
 
-[Live Preview in Spaces!](https://huggingface.co/spaces/stepp1/researcher-app)
+<center> <img src="./app.png" width="500px"></img></center>
 
 Author: @stepp1
 
