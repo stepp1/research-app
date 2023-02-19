@@ -66,6 +66,15 @@ curl -L https://zenodo.org/record/7653458/files/dataset.json -o researcher/data/
 curl -L https://zenodo.org/record/7653458/files/data.tar.xz | tar -xJ -C researcher/data/
 ```
 
+## Extract text from the images
+> TODO
+We provide a script to extract text from the images stored in `researcher/data/images/`.
+
+```bash
+python utils/extract_text.py
+```
+
+
 ## Download the PDF files
 
 > TODO
