@@ -6,13 +6,30 @@ channels:
 dependencies:
   - _libgcc_mutex=0.1
   - _openmp_mutex=4.5
+  - aiohttp=3.8.4
+  - aiosignal=1.3.1
   - alsa-lib=1.2.8
   - aom=3.5.0
   - appdirs=1.4.4
+  - arrow-cpp=11.0.0
   - arxiv=1.4.3
   - asttokens=2.2.1
+  - async-timeout=4.0.2
   - attr=2.5.1
   - attrs=22.2.0
+  - aws-c-auth=0.6.24
+  - aws-c-cal=0.5.20
+  - aws-c-common=0.8.10
+  - aws-c-compression=0.2.16
+  - aws-c-event-stream=0.2.18
+  - aws-c-http=0.7.4
+  - aws-c-io=0.13.15
+  - aws-c-mqtt=0.8.6
+  - aws-c-s3=0.2.4
+  - aws-c-sdkutils=0.1.7
+  - aws-checksums=0.1.14
+  - aws-crt-cpp=0.19.7
+  - aws-sdk-cpp=1.10.57
   - backcall=0.2.0
   - backports=1.0
   - backports.functools_lru_cache=1.6.4
@@ -21,6 +38,7 @@ dependencies:
   - brotli-bin=1.0.9
   - brotlipy=0.7.0
   - bzip2=1.0.8
+  - c-ares=1.18.1
   - ca-certificates=2022.12.7
   - cairo=1.16.0
   - certifi=2022.12.7
@@ -40,9 +58,11 @@ dependencies:
   - cudatoolkit=11.7.0
   - cycler=0.11.0
   - dataclasses=0.8
+  - datasets=2.9.0
   - dbus=1.13.6
   - debugpy=1.6.6
   - decorator=5.1.1
+  - dill=0.3.6
   - executing=1.2.0
   - expat=2.5.0
   - faiss=1.7.2
@@ -59,10 +79,14 @@ dependencies:
   - fonts-conda-forge=1
   - fonttools=4.38.0
   - freetype=2.12.1
+  - frozenlist=1.3.3
+  - fsspec=2023.1.0
   - fuzzywuzzy=0.18.0
   - gettext=0.21.1
+  - gflags=2.2.2
   - glib=2.74.1
   - glib-tools=2.74.1
+  - glog=0.6.0
   - gmp=6.2.1
   - gmpy2=2.1.2
   - gnutls=3.7.8
@@ -94,7 +118,8 @@ dependencies:
   - ld_impl_linux-64=2.40
   - lerc=4.0.0
   - levenshtein=0.20.9
-  - libabseil=20230125.0
+  - libabseil=20220623.0
+  - libarrow=11.0.0
   - libblas=3.9.0
   - libbrotlicommon=1.0.9
   - libbrotlidec=1.0.9
@@ -103,17 +128,20 @@ dependencies:
   - libcblas=3.9.0
   - libclang=15.0.7
   - libclang13=15.0.7
+  - libcrc32c=1.1.2
   - libcublas=11.10.3.66
   - libcufft=10.7.2.124
   - libcufile=1.5.1.14
   - libcups=2.3.3
   - libcurand=10.3.1.124
+  - libcurl=7.88.0
   - libcusolver=11.4.0.1
   - libcusparse=11.7.4.91
   - libdb=6.2.32
   - libdeflate=1.17
   - libdrm=2.4.114
   - libedit=3.1.20191231
+  - libev=4.33
   - libevent=2.1.10
   - libfaiss=1.7.2
   - libfaiss-avx2=1.7.2
@@ -125,13 +153,16 @@ dependencies:
   - libgfortran-ng=12.2.0
   - libgfortran5=12.2.0
   - libglib=2.74.1
+  - libgoogle-cloud=2.7.0
   - libgpg-error=1.46
+  - libgrpc=1.51.1
   - libhwloc=2.8.0
   - libiconv=1.17
   - libidn2=2.3.4
   - liblapack=3.9.0
   - libllvm11=11.1.0
   - libllvm15=15.0.7
+  - libnghttp2=1.51.0
   - libnpp=11.7.4.75
   - libnsl=2.0.0
   - libnvjpeg=11.8.0.2
@@ -145,13 +176,16 @@ dependencies:
   - libsndfile=1.2.0
   - libsodium=1.0.18
   - libsqlite=3.40.0
+  - libssh2=1.10.0
   - libstdcxx-ng=12.2.0
   - libsystemd0=252
   - libtasn1=4.19.0
+  - libthrift=0.16.0
   - libtiff=4.5.0
   - libtool=2.4.7
   - libudev1=252
   - libunistring=0.9.10
+  - libutf8proc=2.8.0
   - libuuid=2.32.1
   - libva=2.17.0
   - libvorbis=1.3.7
@@ -172,6 +206,8 @@ dependencies:
   - mpfr=4.1.0
   - mpg123=1.31.2
   - mpmath=1.2.1
+  - multidict=6.0.4
+  - multiprocess=0.70.14
   - munkres=1.1.4
   - mysql-common=8.0.32
   - mysql-libs=8.0.32
@@ -187,9 +223,11 @@ dependencies:
   - openh264=2.3.1
   - openjpeg=2.5.0
   - openssl=3.0.8
+  - orc=1.8.2
   - p11-kit=0.24.1
   - packaging=23.0
   - pandas=1.5.3
+  - parquet-cpp=1.5.1
   - parso=0.8.3
   - pcre2=10.40
   - pdf2image=1.16.2
@@ -224,6 +262,7 @@ dependencies:
   - python-dateutil=2.8.2
   - python-fastjsonschema=2.16.2
   - python-levenshtein=0.20.9
+  - python-xxhash=3.2.0
   - python_abi=3.10
   - pytorch=2.0.0.dev20230219
   - pytorch-cuda=11.7
@@ -233,9 +272,12 @@ dependencies:
   - pyzmq=25.0.0
   - qt-main=5.15.8
   - rapidfuzz=2.13.7
+  - re2=2023.02.01
   - readline=8.1.2
   - regex=2022.10.31
   - requests=2.28.2
+  - responses=0.18.0
+  - s2n=1.3.35
   - sacremoses=0.0.53
   - scikit-learn=1.2.1
   - scipy=1.10.0
@@ -247,6 +289,7 @@ dependencies:
   - sgmllib3k=1.0.0
   - sip=6.7.7
   - six=1.16.0
+  - snappy=1.1.9
   - stack_data=0.6.2
   - svt-av1=1.4.1
   - sympy=1.11.1
@@ -262,7 +305,7 @@ dependencies:
   - tornado=6.2
   - tqdm=4.64.1
   - traitlets=5.9.0
-  - transformers=4.19.4
+  - transformers=4.26.1
   - typing-extensions=4.4.0
   - typing_extensions=4.4.0
   - umap-learn=0.5.3
@@ -290,25 +333,23 @@ dependencies:
   - xorg-renderproto=0.11.1
   - xorg-xextproto=7.3.0
   - xorg-xproto=7.0.31
+  - xxhash=0.8.1
   - xz=5.2.6
   - yaml=0.2.5
+  - yarl=1.8.2
   - zeromq=4.3.4
   - zipp=3.14.0
   - zlib=1.2.13
   - zstd=1.5.2
   - pip:
-      - aiohttp==3.8.4
-      - aiosignal==1.3.1
       - altair==4.2.2
       - async-generator==1.10
-      - async-timeout==4.0.2
       - blinker==1.5
       - cachetools==5.3.0
       - cython==0.29.33
       - dataclasses-json==0.5.7
       - entrypoints==0.4
       - exceptiongroup==1.1.0
-      - frozenlist==1.3.3
       - gitdb==4.0.10
       - gitpython==3.1.31
       - google-search-results==2.4.1
@@ -321,7 +362,6 @@ dependencies:
       - marshmallow==3.19.0
       - marshmallow-enum==1.5.1
       - mdurl==0.1.2
-      - multidict==6.0.4
       - mypy-extensions==1.0.0
       - outcome==1.2.0
       - protobuf==3.20.3
@@ -349,4 +389,3 @@ dependencies:
       - validators==0.20.0
       - watchdog==2.2.1
       - wsproto==1.2.0
-      - yarl==1.8.2
