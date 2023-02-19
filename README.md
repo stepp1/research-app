@@ -43,12 +43,12 @@ Remember to forward the port for streamlit if you are running it on a server!
 Data is sourced from PDFs of different papers stored in `researcher/data/pdf/`.
 
 Also, we provide a `dataset.json` file stored at `researcher/data/` that contains the metadata of the papers:
-    - `title`: title of the paper
-    - `authors`: list of authors
-    - `abstract`: abstract of the paper
-    - `url`: url of the paper
-    - `file`: path to the PDF file
-    - `images`: path to the images extracted from the PDF file
+  - `title`: title of the paper
+  - `authors`: list of authors
+  - `abstract`: abstract of the paper
+  - `url`: url of the paper
+  - `file`: path to the PDF file
+  - `images`: path to the images extracted from the PDF file
 
 As distributing the PDF files is quite cumbersome, we provide a script to download the `dataset.json` file and the images from the PDF files.
 
