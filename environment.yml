@@ -119,6 +119,7 @@ dependencies:
   - libfaiss-avx2=1.7.2
   - libffi=3.4.2
   - libflac=1.4.2
+  - libgcc=7.2.0
   - libgcc-ng=12.2.0
   - libgcrypt=1.10.1
   - libgfortran-ng=12.2.0
