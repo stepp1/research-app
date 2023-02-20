@@ -12,7 +12,7 @@ def process_ascii(ascii_text):
     ascii_text = ascii_text.replace("´e", "é")
     ascii_text = ascii_text.replace("´a", "á")
 
-    return ascii_text
+    return ascii_text.strip()
 
 
 def get_authors_str(authors, first_author=False):
@@ -25,32 +25,75 @@ def get_authors_str(authors, first_author=False):
 
 
 def check_publisher(text):
-    text = text.lower()
-    if "published" in text:
+    if "published" in text.lower():
         return True
-    if "publisher" in text:
+    if "publisher" in text.lower():
         return True
-    if "iclr" in text:
+    if "ICLR" in text:
         return True
     if "international conference on learning representations" in text:
         return True
     if "http" in text:
         return True
-    if "journal" in text:
+    if "Journal" in text:
         return True
     if "doi" in text:
         return True
-    if "arxiv" in text:
+    if "arxiv" in text.lower():
         return True
-    if "society" in text:
+    if "Society" in text:
         return True
-    if "copyright" in text:
+    if "copyright" in text.lower():
         return True
-    if "p." in text:
+    if "p." in text.lower():
         return True
     if "pp." in text:
         return True
-    if "vol." in text:
+    if "vol." in text.lower():
+        return True
+    if "volume" in text.lower():
+        return True
+    if "article" in text.lower():
+        return True
+    if "open" == text.lower():
+        return True
+    if "open access" == text.lower():
+        return True
+    if "open-access" == text.lower():
+        return True
+    if "original research" == text.lower():
+        return True
+    if "review" in text.lower():
+        return True
+    if "sciencedirect" in text.lower():
+        return True
+    if "springer" in text.lower():
+        return True
+    if "elsevier" in text.lower():
+        return True
+    if "elsevier" in text.lower().replace(" ", ""):
+        return True
+    if "accepted" in text.lower():
+        return True
+    if "received" in text.lower():
+        return True
+    if "opinion" in text.lower():
+        return True
+    if "available at " in text.lower():
+        return True
+    if "available at:" in text.lower():
+        return True
+    if "Estuarine, Coastal and Shelf Science" in text:
+        return True
+    if "Geomorphology " in text:
+        return True
+    if "Hydrobiologia" in text:
+        return True
+    if "Marine Policy" in text:
+        return True
+    if "Science of the Total Environment" in text:
+        return True
+    if "©" in text:
         return True
 
 

@@ -74,7 +74,6 @@ def serpapi_search(query: str):
             lang="en",
         )[0]
 
-    print(result)
     if "arxiv" in result["link"]:
         logging.info(f"Found arxiv link: {result['link']}")
         arxiv_id = result["link"].split("/")[-1]

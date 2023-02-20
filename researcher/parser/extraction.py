@@ -31,9 +31,9 @@ class PDFExtractor:
             text = self.outfp.getvalue()
 
             for i, line in enumerate(text.splitlines()):
-                if len(line) > 2 and not check_publisher(line):
-                    line = process_ascii(line)
+                line = process_ascii(line)
 
+                if len(line) > 2 and not check_publisher(line):
                     if is_complete(line) and self.title_line == -1 and len(line) > 3:
                         self.title_line = i
                         self.title += line
