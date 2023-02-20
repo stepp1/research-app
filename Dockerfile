@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     git \
     graphviz \
     wget \
+    nano \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -19,20 +20,28 @@ ENV PATH=$PATH:/root/mambaforge/bin
 
 WORKDIR /app
 
-
-
 RUN git clone https://github.com/stepp1/research-app.git .
 RUN mamba create -n researcher python=3.10
 RUN mamba install -n researcher pdfminer matplotlib scikit-learn pandas nltk plotly numpy sentence-transformers fuzzywuzzy umap-learn python-levenshtein pdf2image arxiv pytorch torchvision torchaudio pytorch-cuda=11.7 faiss -c pytorch-nightly -c nvidia -y 
 
 # activate
+SHELL ["conda", "run", "-n", "researcher", "/bin/bash", "-c"]
 RUN echo "conda activate researcher" >> ~/.bashrc
-SHELL ["/bin/bash", "--login", "-c"]
+RUN echo "Make sure torch is installed:"
+RUN python -c "import torch"
 
-RUN pip install streamlit google-search-results selenium selectolax selenium-stealth langchain "black[jupyter]" InstructorEmbedding
+RUN python -m pip install streamlit google-search-results selenium selectolax selenium-stealth langchain  InstructorEmbedding python-dotenv "black[jupyter]"
+
+RUN mamba clean --all -y
 
 EXPOSE 8501
+EXPOSE 80
 
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+SHELL ["/bin/bash", "--login", "-c"]
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=80", "--server.address=0.0.0.0"]
+
+# sudo docker build . -t research-app:latest
+# sudo docker run -i -v $(pwd)/.env:/app/.env -t research-app:latest
+# streamlit run app.py --server.port=8501 --server.address=0.0.0.0
