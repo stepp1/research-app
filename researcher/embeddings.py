@@ -1,5 +1,4 @@
 import logging
-import os
 import random
 
 import numpy as np
@@ -39,7 +38,7 @@ class Embeddings:
         self.has_encoded = True
         return embeddings
 
-    def cluster_assignment(self, embeddings=None, method_name="kmeans", **kwargs):
+    def cluster(self, embeddings=None, method_name="kmeans", **kwargs):
         logging.info("Clustering with {}".format(str(method_name) + "_assignment"))
 
         embeddings = self.check_embeddings(embeddings)
@@ -64,6 +63,7 @@ class Embeddings:
         raise NotImplementedError("Agglomerative Clustering not implemented yet")
 
     def get_top_words(self, sentences=None, n=4, data=None):
+        self.check_sentences(sentences)
         ###### TODO: (step) clean up this code
 
         # group sentences by cluster
@@ -71,8 +71,8 @@ class Embeddings:
         for i, cluster in enumerate(self.cluster_assignment):
             if cluster not in cluster_sentences:
                 cluster_sentences[cluster] = []
-            cluster_sentences[cluster].append(self.cluster_assignment[i])
-
+            cluster_sentences[cluster].append(sentences[i])
+        print()
         cluster_tops = {}
         for cluster_k, cluster_values in cluster_sentences.items():
             # compute tf-idf
@@ -96,6 +96,15 @@ class Embeddings:
 
         return top_words
 
+    def check_sentences(self, sentences):
+        if sentences is None:
+            if not self.has_encoded:
+                raise ValueError("No sentences provided")
+            else:
+                sentences = self.sentences
+
+        return sentences
+
     def check_embeddings(self, embeddings):
         if embeddings is None:
             if not self.has_encoded:
@@ -103,7 +112,7 @@ class Embeddings:
             else:
                 embeddings = self.embeddings
 
-        return embeddings
+        return np.array(embeddings)
 
 
 def embeddings_kmeans(embeddings, n_clusters=2):

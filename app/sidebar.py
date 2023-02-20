@@ -80,7 +80,7 @@ def preprocess_sidebar(sentences, data):
             sentences_processed = prep_clause(sentences_processed)
         data["sentences_processed"] = sentences_processed
 
-    return sentences_processed, use_preproc
+    return use_preproc
 
 
 def embeddings_sidebar(sentences, sentences_processed, use_preproc, data):
@@ -132,11 +132,14 @@ def embeddings_sidebar(sentences, sentences_processed, use_preproc, data):
             f"Embeddings shape: {embeddings.shape}. Statistics: {embeddings.mean()}, {embeddings.std()}"
         )
         data["embeddings"] = embeddings.tolist()
+    return model, model_name
 
-    return embeddings, model, model_name
 
+def visualization_sidebar(model, embeddings=None, data=None):
+    # must provide embeddings or model.embeddings
+    if embeddings is None:
+        embeddings = model.embeddings
 
-def visualization_sidebar(model, embeddings, data):
     ## viz
     with st.expander("Visualization", True):
         mod = st.selectbox(
@@ -208,9 +211,9 @@ def visualization_sidebar(model, embeddings, data):
             f"Using {mod} as clustering algorithm. Clustering arguments: {clustering_args}"
         )
 
-        cluster_assignment = model.cluster_assignment(
+        cluster_assignment = model.cluster(
             embeddings=embeddings, method_name=cluster_method, **clustering_args
         )
         data["cluster_assignment"] = cluster_assignment.tolist()
 
-    return cluster_assignment, cluster_method, decompose_method
+    return cluster_method, decompose_method
