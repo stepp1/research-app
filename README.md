@@ -66,22 +66,9 @@ curl -L https://zenodo.org/record/7653458/files/dataset.json -o researcher/data/
 curl -L https://zenodo.org/record/7653458/files/data.tar.xz | tar -xJ -C researcher/data/
 ```
 
-## Extract text from the images
-> TODO
-We provide a script to extract text from the images stored in `researcher/data/images/`.
+## Data Processing
 
-```bash
-python utils/extract_text.py
-```
+We provide multiple scripts to preprocess data.
 
-
-## Download the PDF files
-
-> TODO
-We provide a script to download the PDF files from the `dataset.json` file.
-
-```bash
-python utils/download_pdfs.py
-```
-
-
+- Extract images from PDFs `utils/img2txt.py`
+- Extract text from the images: `utils/img2txt.py`
