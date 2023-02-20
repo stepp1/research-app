@@ -1,11 +1,9 @@
-import json
 import logging
 import random
 import time
 
 import numpy as np
 import streamlit as st
-from sklearn.feature_extraction.text import TfidfVectorizer
 
 from app.sidebar import (
     embeddings_sidebar,
@@ -88,35 +86,10 @@ with tab1:
 
     logging.info("Clustering embeddings")
 
-    ###### TODO: (step) clean up this code
-    # group sentences by cluster
-    cluster_sentences = {}
-    for i, cluster in enumerate(cluster_assignment):
-        if cluster not in cluster_sentences:
-            cluster_sentences[cluster] = []
-        cluster_sentences[cluster].append(sentences_processed[i])
+    # get top words
+    data = model.get_top_words(data=data)
 
-    cluster_tops = {}
-    for cluster_k, cluster_values in cluster_sentences.items():
-        # compute tf-idf
-        vectorizer = TfidfVectorizer(ngram_range=(2, 2), max_features=1000)
-        tfidf = vectorizer.fit_transform(cluster_values)
-
-        # obtain the top 10 words
-        top_words = np.array(tfidf.sum(axis=0).tolist()[0]).argsort()[-4:][::-1]
-
-        top_words = [vectorizer.get_feature_names_out()[i] for i in top_words]
-
-        cluster_tops[cluster_k] = top_words
-
-    top_words = []
-    for i, cluster in enumerate(cluster_assignment):
-        top_words.append(str(cluster_tops[cluster]))
-
-    data["top_words"] = top_words
-    ######
-
-    data["color"] = top_words
+    data["color"] = data["top_words"]
     data["label"] = data["title"]
 
     mod_model_name = {v: k for k, v in model_mapping.items()}[model_name]
