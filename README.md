@@ -1,7 +1,7 @@
 # Researcher App
 An app that aims to organize your research: *A Researcher with a Paper Based Approach*
 
-<center> <img src="./app.png" width="500px"></img></center>
+<center> <img src="./app/app.png" width="1000px"></img></center>
 
 Author: @stepp1
 
