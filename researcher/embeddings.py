@@ -1,21 +1,14 @@
 import logging
 import os
 import random
-from pathlib import Path
 
 import numpy as np
-import streamlit as st
-from dotenv import load_dotenv
-from langchain.embeddings import (
-    HuggingFaceEmbeddings,
-    HuggingFaceInstructEmbeddings,
-    OpenAIEmbeddings,
-)
 from sklearn import cluster
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+from researcher.models import embeddings_encode
 
 random.seed(42)
-
-EMBED_INSTRUCTION_PAPERS = "Represent these paper abstracts for retrieval: "
 
 
 class Embeddings:
@@ -23,86 +16,94 @@ class Embeddings:
         self.model_name = model_name
         self.key = key
 
+        self.cluster_assignment = None
+
+        # Embeddings
+        self.has_encoded = False
+        self.sentences = None
+        self.embeddings = None
+        self.model = None
+
+        # Clustering Embeddings
+        self.cluster_method = ""
+        self.cluster_assignment = None
+
     def encode(self, sentences, clustering=False):
         embeddings, model = embeddings_encode(
             self.model_name, sentences, clustering, self.key
         )
+
+        self.sentences = sentences
+        self.embeddings = embeddings
         self.model = model
+        self.has_encoded = True
         return embeddings
 
-    def cluster_assignment(self, embeddings, method_name="kmeans", **kwargs):
+    def cluster_assignment(self, embeddings=None, method_name="kmeans", **kwargs):
         logging.info("Clustering with {}".format(str(method_name) + "_assignment"))
-        return getattr(self, method_name + "_assignment")(embeddings, **kwargs)
 
-    def kmeans_assignment(self, embeddings, n_clusters=2):
-        return embeddings_kmeans(embeddings, n_clusters)
+        embeddings = self.check_embeddings(embeddings)
 
-    def dbscan_assignment(self, embeddings, eps=0.5, min_samples=4):
+        self.cluster_assignment = getattr(self, method_name + "_assignment")(
+            embeddings, **kwargs
+        )
+        return self.cluster_assignment
+
+    def kmeans_assignment(self, embeddings=None, n_clusters=2):
+        self.cluster_method = "kmeans"
+        embeddings = self.check_embeddings(embeddings)
+        cluster_assignment = embeddings_kmeans(embeddings, n_clusters)
+        return cluster_assignment
+
+    def dbscan_assignment(self, embeddings=None, eps=0.5, min_samples=4):
         raise NotImplementedError("DBSCAN not implemented yet")
 
     def agglomerative_assignment(
-        self, embeddings, clusters=2, affinity="euclidean", linkage="ward"
+        self, embeddings=None, clusters=2, affinity="euclidean", linkage="ward"
     ):
         raise NotImplementedError("Agglomerative Clustering not implemented yet")
 
+    def get_top_words(self, sentences=None, n=4, data=None):
+        ###### TODO: (step) clean up this code
 
-def load_key(key_name="", key_val=""):
-    if Path(".env").exists():
-        load_dotenv()
-    elif key_val != "":
-        os.environ[key_name] = key_val
-    else:
-        raise ValueError("No .env nor key provided")
+        # group sentences by cluster
+        cluster_sentences = {}
+        for i, cluster in enumerate(self.cluster_assignment):
+            if cluster not in cluster_sentences:
+                cluster_sentences[cluster] = []
+            cluster_sentences[cluster].append(self.cluster_assignment[i])
 
-    return os.environ[key_name]
+        cluster_tops = {}
+        for cluster_k, cluster_values in cluster_sentences.items():
+            # compute tf-idf
+            vectorizer = TfidfVectorizer(ngram_range=(2, 2), max_features=1000)
+            tfidf = vectorizer.fit_transform(cluster_values)
 
+            # obtain the top 10 words
+            top_words = np.array(tfidf.sum(axis=0).tolist()[0]).argsort()[-n:][::-1]
 
-@st.cache_resource
-def instructor_encode(sentences, clustering=False):
-    if clustering:
-        embed_instruction = EMBED_INSTRUCTION_PAPERS.replace(
-            "for retrieval: ", "for clustering: "
-        )
-    else:
-        embed_instruction = EMBED_INSTRUCTION_PAPERS
+            top_words = [vectorizer.get_feature_names_out()[i] for i in top_words]
 
-    model = HuggingFaceInstructEmbeddings(embed_instruction=embed_instruction)
-    embeddings = model.embed_documents(sentences)
-    return embeddings, model
+            cluster_tops[cluster_k] = top_words
 
+        top_words = []
+        for i, cluster in enumerate(self.cluster_assignment):
+            top_words.append(str(cluster_tops[cluster]))
 
-@st.cache_resource
-def openai_encode(sentences, key=""):
-    key = load_key("OPENAI_API_KEY", key)
-    model = OpenAIEmbeddings(openai_api_key=key)
-    embeddings = model.embed_documents(sentences)
-    # os.environ["OPENAI_API_KEY"] = ""
+        if data is not None:
+            data["top_words"] = top_words
+            return data
 
-    return embeddings, model
+        return top_words
 
+    def check_embeddings(self, embeddings):
+        if embeddings is None:
+            if not self.has_encoded:
+                raise ValueError("No embeddings provided")
+            else:
+                embeddings = self.embeddings
 
-@st.cache_resource
-def huggingface_encode(sentences):
-    model = HuggingFaceEmbeddings()
-    embeddings = model.embed_documents(sentences)
-    return embeddings, model
-
-
-@st.cache_resource
-def embeddings_encode(model_name, sentences, clustering=False, key=""):
-    if model_name in ["instructor", "instruct"]:
-        embeddings = instructor_encode(sentences, clustering)
-
-    elif model_name in ["openai", "open-ai"]:
-        embeddings = openai_encode(sentences, key)
-
-    elif model_name in ["huggingface", "hf"]:
-        embeddings = huggingface_encode(sentences)
-
-    else:
-        raise ValueError("Unknown model name: {}".format(model_name))
-
-    return embeddings
+        return embeddings
 
 
 def embeddings_kmeans(embeddings, n_clusters=2):
