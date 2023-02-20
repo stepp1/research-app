@@ -18,7 +18,7 @@ Author: @stepp1
 # Installation
 1. Clone the repository
 ```bash
-git clone ...
+git clone git@github.com:stepp1/research-app.git
 ``` 
 
 2. Install the dependencies using conda/mamba
@@ -28,7 +28,7 @@ conda env create -f environment.yml
 
 3. Activate the environment
 ```bash
-conda activate researcher-app
+conda activate researcher
 ```
 
 4. Run the app
@@ -40,19 +40,11 @@ Remember to forward the port for streamlit if you are running it on a server!
 
 # Dataset
 
-Data is sourced from PDFs of different papers stored in `researcher/data/pdf/`.
+We provide a `dataset.json` file stored at `researcher/data/` that contains the metadata of the papers.
 
-Also, we provide a `dataset.json` file stored at `researcher/data/` that contains the metadata of the papers:
-  - `title`: title of the paper
-  - `authors`: list of authors
-  - `abstract`: abstract of the paper
-  - `url`: url of the paper
-  - `file`: path to the PDF file
-  - `images`: path to the images extracted from the PDF file
+Full dataset is currently hosted on Zenodo: https://zenodo.org/record/7653458
 
-As distributing the PDF files is quite cumbersome, we provide a script to download the `dataset.json` file and the images from the PDF files.
-
-Data is currently hosted on Zenodo: https://zenodo.org/record/7653458
+More information about the dataset can be found in the [DATA.md](./DATA.md) file.
 
 ## Download the dataset
 
@@ -65,10 +57,3 @@ curl -L https://zenodo.org/record/7653458/files/dataset.json -o researcher/data/
 ```bash
 curl -L https://zenodo.org/record/7653458/files/data.tar.xz | tar -xJ -C researcher/data/
 ```
-
-## Data Processing
-
-We provide multiple scripts to preprocess data.
-
-- Extract images from PDFs `utils/img2txt.py`
-- Extract text from the images: `utils/img2txt.py`
