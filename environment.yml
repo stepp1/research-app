@@ -301,9 +301,7 @@ dependencies:
   - tk=8.6.12
   - tokenizers=0.13.2
   - toml=0.10.2
-  - torchaudio=2.0.0.dev20230219
   - torchtriton=2.0.0+c8bfe3f548
-  - torchvision=0.15.0.dev20230219
   - tornado=6.2
   - tqdm=4.64.1
   - traitlets=5.9.0
