@@ -1,4 +1,7 @@
-data/
+researcher/data/*
+researcher/out/*
+!researcher/data/dataset.json
+!researcher/data/README.md
 models/
 notebooks/
 utils/
