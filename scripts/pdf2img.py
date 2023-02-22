@@ -6,6 +6,7 @@
 import json
 import logging
 from pathlib import Path
+import sys
 from typing import List, Union
 
 import pdf2image
@@ -129,12 +130,12 @@ if __name__ == "__main__":
     if args.pdf:
         images = extract_from_pdf(args.pdf, args.output)
         logging.info(f"Done! Check {args.output}")
-        exit(0)
+        sys.exit(0)
 
     elif args.folder:
         images = extract_from_folder(args.folder, args.output)
         logging.info(f"Done! Check {args.output}")
-        exit(0)
+        sys.exit(0)
 
     else:
         assert args.dataset, "Please specify dataset card, image or folder."
