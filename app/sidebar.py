@@ -88,7 +88,7 @@ def embeddings_sidebar(sentences, sentences_processed, use_preproc, data):
     with st.expander("Embeddings", True):
         mod = st.selectbox(
             "Embedding Algorithm",
-            # ["tf-idf","Hash", "Universal Sentence Encoder"],
+            # TODO: add tf-idf, Universal Sentence Encoder
             ["Instructor Embeddings", "OpenAI Embeddings", "HuggingFace Embeddings"],
             help="Algorithm used for sentence embeddings, preprocessing steps may be duplicated between the above and the following models. See LangChain's Embeddings Documentation for more information.",
         )
@@ -113,7 +113,7 @@ def embeddings_sidebar(sentences, sentences_processed, use_preproc, data):
                 5,
                 help="Break sentences into chunks ranging in length from 1 to n. This may add some contextual information in the embeddings for bag-of-words based algorithms",
             )
-            # emb = model_tfidf(prep, (1,ng))
+            # TODO: emb = model_tfidf(prep, (1,ng))
 
             ng = st.slider(
                 "ngram_range",
@@ -121,7 +121,7 @@ def embeddings_sidebar(sentences, sentences_processed, use_preproc, data):
                 5,
                 help="Break sentences into chunks ranging in length from 1 to n. This may add some contextual information in the embeddings for bag-of-words based algorithms",
             )
-            # emb = model_count(prep, (1,ng))
+            # TODO: emb = model_count(prep, (1,ng))
 
         if use_preproc:
             embeddings = model.encode(sentences=sentences_processed)
@@ -140,7 +140,7 @@ def visualization_sidebar(model, embeddings=None, data=None):
     if embeddings is None:
         embeddings = model.embeddings
 
-    ## viz
+    # visualization: dimensionality reduction and clustering
     with st.expander("Visualization", True):
         mod = st.selectbox(
             "Dimensionality Reduction",

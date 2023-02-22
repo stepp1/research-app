@@ -126,7 +126,7 @@ def scrape_google_scholar_organic_results(
 
     # selenium stealth
     options = webdriver.ChromeOptions()
-    # options.add_argument('--headless')
+    options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
 
