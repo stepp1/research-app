@@ -5,7 +5,6 @@ import numpy as np
 import streamlit as st
 
 from researcher import Embeddings, extract_paper
-from researcher.parser.parse import extract_paper
 from researcher.parser.utils import add_to_json
 from researcher.preprocessing import *
 
