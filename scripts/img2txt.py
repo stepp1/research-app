@@ -73,7 +73,7 @@ def list_images(path: Union[str, Path]) -> List[Path]:
 
 
 def extract_text(img_paths: List[Path]) -> List[str]:
-    """Extract text from the given images"""
+    """Extract text from the given image_folder"""
     return [img2txt(img) for img in img_paths]
 
 
@@ -81,9 +81,9 @@ def extract_from_dataset(
     ds_card: Dict[str, Union[List[str], str]]
 ) -> Dict[str, Union[List[str], str]]:
     """Extract text from images in dataset card"""
-    for i in range(len(ds_card)):
-        sample = ds_card[i]
-        sample_text_path = Path(sample["images"]) / "text.parquet"
+
+    for i, sample in enumerate(ds_card):
+        sample_text_path = Path(sample["image_folder"]) / "text.parquet"
 
         logging.info(f"Processing {i}th card. {sample['title']}")
         start = time.time()
@@ -96,7 +96,7 @@ def extract_from_dataset(
             logging.info(f"Done in {time.time() - start} seconds")
             continue
 
-        img_paths = list_images(sample["images"])
+        img_paths = list_images(sample["image_folder"])
         batch_size = 16  # max in RTX 3090
         n_batches = len(img_paths) // batch_size
         logging.info(f"Number of batches: {n_batches}")
@@ -143,7 +143,7 @@ if "__main__" == __name__:
     """
     import argparse
 
-    parser = argparse.ArgumentParser(description="Extract text from images")
+    parser = argparse.ArgumentParser(description="Extract text from image_folder")
     parser.add_argument(
         "-d",
         "--dataset",
@@ -160,7 +160,7 @@ if "__main__" == __name__:
         "-f",
         "--folder",
         type=str,
-        help="folder with images",
+        help="folder with image_folder",
     )
 
     args = parser.parse_args()

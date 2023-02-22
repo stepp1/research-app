@@ -43,7 +43,7 @@ def extract_from_folder(folder: Union[str, Path], output_folder=None, prefix=Non
 
     all_images = []
     for pdf in tqdm(Path(folder).glob("*.pdf")):
-        output_folder = Path(base_output_folder) / Path(pdf.stem)
+        output_folder = Path(base_output_folder) / "jpg" / Path(pdf.stem)
         output_folder.mkdir(exist_ok=True, parents=True)
 
         images = extract_from_pdf(pdf, output_folder, prefix)
@@ -61,11 +61,25 @@ def extract_from_dataset(ds_card: dict, output_folder=None) -> List[str]:
             print(f"File not found: {data['file']}")
             continue
 
+        # if image_path is not specified, create correct path
+        # researcher/data/jpg/ Path(data["file"]).stem
+        if "image_path" not in data and output_folder is None:
+            data["image_folder"] = str(
+                Path(data["file"]).parent.parent / "jpg" / Path(data["file"]).stem
+            )
+        elif "image_path" not in data and output_folder is not None:
+            data["image_folder"] = str(
+                Path(output_folder) / "jpg" / Path(data["file"]).stem
+            )
+
         # remove old images
         for image in Path(data["image_path"]).glob("*.jpg"):
             image.unlink()
 
-        output_folder = data["image_path"] if output_folder is None else output_folder
+        images = extract_from_pdf(data["file"], data["image_path"])
+
+        # set images list
+        data["images"] = [str(image.filename) for image in images]
 
         all_images.extend(images)
 
