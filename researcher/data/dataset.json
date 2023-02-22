@@ -10,7 +10,7 @@
         ],
         "abstract": "Most data is automatically collected and only ever \"seen\" by algorithms. Yet, data compressors preserve perceptual fidelity rather than just the information needed by algorithms performing downstream tasks. In this paper, we characterize the bit-rate required to ensure high performance on all predictive tasks that are invariant under a set of transformations, such as data augmentations. Based on our theory, we design unsupervised objectives for training neural compressors. Using these objectives, we train a generic image compressor that achieves substantial rate savings (more than $1000\\times$ on ImageNet) compared to JPEG on 8 datasets, without decreasing downstream classification performance.",
         "file": "researcher/data/pdf/2106.10800v5.Lossy_Compression_for_Lossless_Prediction.pdf",
-        "images": "researcher/data/jpg/2106.10800v5.Lossy_Compression_for_Lossless_Prediction"
+        "image_folder": "researcher/data/jpg/2106.10800v5.Lossy_Compression_for_Lossless_Prediction"
     },
     {
         "title": "Recent Advances in Autoencoder-Based Representation Learning",
@@ -22,7 +22,7 @@
         ],
         "abstract": "Learning useful representations with little or no supervision is a key challenge in artificial intelligence. We provide an in-depth review of recent advances in representation learning with a focus on autoencoder-based models. To organize these results we make use of meta-priors believed useful for downstream tasks, such as disentanglement and hierarchical organization of features. In particular, we uncover three main mechanisms to enforce such properties, namely (i) regularizing the (approximate or aggregate) posterior distribution, (ii) factorizing the encoding and decoding distribution, or (iii) introducing a structured prior distribution. While there are some promising results, implicit or explicit supervision remains a key enabler and all current methods use strong inductive biases and modeling assumptions. Finally, we provide an analysis of autoencoder-based representation learning through the lens of rate-distortion theory and identify a clear tradeoff between the amount of prior knowledge available about the downstream tasks, and how useful the representation is for this task.",
         "file": "researcher/data/pdf/1812.05069v1.Recent_Advances_in_Autoencoder_Based_Representation_Learning.pdf",
-        "images": "researcher/data/jpg/1812.05069v1.Recent_Advances_in_Autoencoder_Based_Representation_Learning"
+        "image_folder": "researcher/data/jpg/1812.05069v1.Recent_Advances_in_Autoencoder_Based_Representation_Learning"
     },
     {
         "title": "Unpacking Information Bottlenecks: Unifying Information-Theoretic Objectives in Deep Learning",
@@ -34,7 +34,7 @@
         ],
         "abstract": "The Information Bottleneck principle offers both a mechanism to explain how deep neural networks train and generalize, as well as a regularized objective with which to train models. However, multiple competing objectives are proposed in the literature, and the information-theoretic quantities used in these objectives are difficult to compute for large deep neural networks, which in turn limits their use as a training objective. In this work, we review these quantities and compare and unify previously proposed objectives, which allows us to develop surrogate objectives more friendly to optimization without relying on cumbersome tools such as density estimation. We find that these surrogate objectives allow us to apply the information bottleneck to modern neural network architectures. We demonstrate our insights on MNIST, CIFAR-10 and Imagenette with modern DNN architectures (ResNets).",
         "file": "researcher/data/pdf/2003.12537.pdf",
-        "images": "researcher/data/jpg/2003.12537"
+        "image_folder": "researcher/data/jpg/2003.12537"
     },
     {
         "title": "Lossy Image Compression with Normalizing Flows",
@@ -47,7 +47,7 @@
         ],
         "abstract": "Deep learning based image compression has recently witnessed exciting progress and in some cases even managed to surpass transform coding based approaches that have been established and refined over many decades. However, state-of-the-art solutions for deep image compression typically employ autoencoders which map the input to a lower dimensional latent space and thus irreversibly discard information already before quantization. Due to that, they inherently limit the range of quality levels that can be covered. In contrast, traditional approaches in image compression allow for a larger range of quality levels. Interestingly, they employ an invertible transformation before performing the quantization step which explicitly discards information. Inspired by this, we propose a deep image compression method that is able to go from low bit-rates to near lossless quality by leveraging normalizing flows to learn a bijective mapping from the image space to a latent representation. In addition to this, we demonstrate further advantages unique to our solution, such as the ability to maintain constant quality results through re-encoding, even when performed multiple times. To the best of our knowledge, this is the first work to explore the opportunities for leveraging normalizing flows for lossy image compression.",
         "file": "researcher/data/pdf/2008.10486.pdf",
-        "images": "researcher/data/jpg/2008.10486"
+        "image_folder": "researcher/data/jpg/2008.10486"
     },
     {
         "title": "Structure Learning in Graphical Modeling",
@@ -58,7 +58,7 @@
         ],
         "abstract": "A graphical model is a statistical model that is associated to a graph whose nodes correspond to variables of interest. The edges of the graph reflect allowed conditional dependencies among the variables. Graphical models admit computationally convenient factorization properties and have long been a valuable tool for tractable modeling of multivariate distributions. More recently, applications such as reconstructing gene regulatory networks from gene expression data have driven major advances in structure learning, that is, estimating the graph underlying a model. We review some of these advances and discuss methods such as the graphical lasso and neighborhood selection for undirected graphical models (or Markov random fields), and the PC algorithm and score-based search methods for directed graphical models (or Bayesian networks). We further review extensions that account for effects of latent variables and heterogeneous data sources.",
         "file": "researcher/data/pdf/1606.02359.pdf",
-        "images": "researcher/data/jpg/1606.02359"
+        "image_folder": "researcher/data/jpg/1606.02359"
     },
     {
         "title": "Learning bias-invariant representation by cross-sample mutual information minimization",
@@ -71,7 +71,7 @@
         ],
         "abstract": " Deep learning algorithms mine knowledge from the training data and thus would likely inherit the dataset's bias information. As a result, the obtained model would generalize poorly and even mislead the decision process in real-life applications. We propose to remove the bias information misused by the target task with a cross-sample adversarial debiasing (CSAD) method. CSAD explicitly extracts target and bias features disentangled from the latent representation generated by a feature extractor and then learns to discover and remove the correlation between the target and bias features. The correlation measurement plays a critical role in adversarial debiasing and is conducted by a cross-sample neural mutual information estimator. Moreover, we propose joint content and local structural representation learning to boost mutual information estimation for better performance. We conduct thorough experiments on publicly available datasets to validate the advantages of the proposed method over state-of-the-art approaches.",
         "file": "researcher/data/pdf/2108.05449v2.Learning_Bias_Invariant_Representation_by_Cross_Sample_Mutual_Information_Minimization.pdf",
-        "images": "researcher/data/jpg/2108.05449v2.Learning_Bias_Invariant_Representation_by_Cross_Sample_Mutual_Information_Minimization"
+        "image_folder": "researcher/data/jpg/2108.05449v2.Learning_Bias_Invariant_Representation_by_Cross_Sample_Mutual_Information_Minimization"
     },
     {
         "title": "E(3)-Equivariant Graph Neural Networks for Data-Efficient and Accurate Interatomic Potentials",
@@ -84,7 +84,7 @@
         ],
         "abstract": "AThis work presents Neural Equivariant Interatomic Potentials (NequIP), an E(3)-equivariant neural network approach for learning interatomic potentials from ab-initio calculations for molecular dynamics simulations. While most contemporary symmetry-aware models use invariant convolutions and only act on scalars, NequIP employs E(3)-equivariant convolutions for interactions of geometric tensors, resulting in a more information-rich and faithful representation of atomic environments. The method achieves state-of-the-art accuracy on a challenging and diverse set of molecules and materials while exhibiting remarkable data efficiency. NequIP outperforms existing models with up to three orders of magnitude fewer training data, challenging the widely held belief that deep neural networks require massive training sets. The high data efficiency of the method allows for the construction of accurate potentials using high-order quantum chemical level of theory as reference and enables high-fidelity molecular dynamics simulations over long time scales. ",
         "file": "researcher/data/pdf/2101.03164v3.E_3_Equivariant_Graph_Neural_Networks_for_Data_Efficient_and_Accurate_Interatomic_Potentials.pdf",
-        "images": "researcher/data/jpg/2101.03164v3.E_3_Equivariant_Graph_Neural_Networks_for_Data_Efficient_and_Accurate_Interatomic_Potentials"
+        "image_folder": "researcher/data/jpg/2101.03164v3.E_3_Equivariant_Graph_Neural_Networks_for_Data_Efficient_and_Accurate_Interatomic_Potentials"
     },
     {
         "title": "Leveraging Importance Weights in Subset Selection",
@@ -99,7 +99,7 @@
         ],
         "abstract": "We present a subset selection algorithm designed to work with arbitrary model families in a practical batch setting. In such a setting, an algorithm can sample examples one at a time but, in order to limit overhead costs, is only able to update its state (i.e. further train model weights) once a large enough batch of examples is selected. Our algorithm, IWeS, selects examples by importance sampling where the sampling probability assigned to each example is based on the entropy of models trained on previously selected batches. IWeS admits significant performance improvement compared to other subset selection algorithms for seven publicly available datasets. Additionally, it is competitive in an active learning setting, where the label information is not available at selection time. We also provide an initial theoretical analysis to support our importance weighting approach, proving generalization and sampling rate bounds.",
         "file": "researcher/data/pdf/2301.12052.pdf",
-        "images": "researcher/data/jpg/2301.12052"
+        "image_folder": "researcher/data/jpg/2301.12052"
     },
     {
         "title": "Deep Bayesian Active Learning with Image Data",
@@ -111,7 +111,7 @@
         ],
         "abstract": "Even though active learning forms an important pillar of machine learning, deep learning tools are not prevalent within it. Deep learning poses several difficulties when used in an active learning setting. First, active learning (AL) methods generally rely on being able to learn and update models from small amounts of data. Recent advances in deep learning, on the other hand, are notorious for their dependence on large amounts of data. Second, many AL acquisition functions rely on model uncertainty, yet deep learning methods rarely represent such model uncertainty. In this paper we combine recent advances in Bayesian deep learning into the active learning framework in a practical way. We develop an active learning framework for high dimensional data, a task which has been extremely challenging so far, with very sparse existing literature. Taking advantage of specialised models such as Bayesian convolutional neural networks, we demonstrate our active learning techniques with image data, obtaining a significant improvement on existing active learning approaches. We demonstrate this on both the MNIST dataset, as well as for skin cancer diagnosis from lesion images (ISIC2016 task).",
         "file": "researcher/data/pdf/1703.02910v1.Deep_Bayesian_Active_Learning_with_Image_Data.pdf",
-        "images": "researcher/data/jpg/1703.02910v1.Deep_Bayesian_Active_Learning_with_Image_Data"
+        "image_folder": "researcher/data/jpg/1703.02910v1.Deep_Bayesian_Active_Learning_with_Image_Data"
     },
     {
         "title": "ConvNeXt V2: Co-designing and Scaling ConvNets with Masked Autoencoders",
@@ -127,7 +127,7 @@
         ],
         "abstract": "Driven by improved architectures and better representation learning frameworks, the field of visual recognition has enjoyed rapid modernization and performance boost in the early 2020s. For example, modern ConvNets, represented by ConvNeXt, have demonstrated strong performance in various scenarios. While these models were originally designed for supervised learning with ImageNet labels, they can also potentially benefit from self-supervised learning techniques such as masked autoencoders (MAE). However, we found that simply combining these two approaches leads to subpar performance. In this paper, we propose a fully convolutional masked autoencoder framework and a new Global Response Normalization (GRN) layer that can be added to the ConvNeXt architecture to enhance inter-channel feature competition. This co-design of self-supervised learning techniques and architectural improvement results in a new model family called ConvNeXt V2, which significantly improves the performance of pure ConvNets on various recognition benchmarks, including ImageNet classification, COCO detection, and ADE20K segmentation. We also provide pre-trained ConvNeXt V2 models of various sizes, ranging from an efficient 3.7M-parameter Atto model with 76.7% top-1 accuracy on ImageNet, to a 650M Huge model that achieves a state-of-the-art 88.9% accuracy using only public training data.",
         "file": "researcher/data/pdf/2301.00808.pdf",
-        "images": "researcher/data/jpg/2301.00808"
+        "image_folder": "researcher/data/jpg/2301.00808"
     },
     {
         "title": "Unifying Approaches in Active Learning and Active Sampling via Fisher Information and Information-Theoretic Quantities",
@@ -138,7 +138,7 @@
         ],
         "abstract": "Recently proposed methods in data subset selection, that is active learning and active sampling, use Fisher information, Hessians, similarity matrices based on gradients, and gradient lengths to estimate how informative data is for a model\u2019s training. Are these different approaches connected, and if so, how? We revisit the fundamentals of Bayesian optimal experiment design and show that these recently proposed methods can be understood as approximations to information-theoretic quantities: among them, the mutual information between predictions and model parameters, known as expected information gain or BALD in machine learning, and the mutual information between predictions of acquisition candidates and test samples, known as expected predictive information gain. We develop a comprehensive set of approximations using Fisher information and observed information and derive a unified framework that connects seemingly disparate literature. Although Bayesian methods are often seen as separate from non-Bayesian ones, the sometimes fuzzy notion of \u201cinformativeness\u201d expressed in various non-Bayesian objectives leads to the same couple of information quantities, which were, in principle, already known by Lindley (1956) and MacKay (1992).",
         "file": "researcher/data/pdf/2208.00549v2.Unifying_Approaches_in_Active_Learning_and_Active_Sampling_via_Fisher_Information_and_Information_Theoretic_Quantities.pdf",
-        "images": "researcher/data/jpg/2208.00549"
+        "image_folder": "researcher/data/jpg/2208.00549"
     },
     {
         "title": "Representation Learning with Diffusion Models",
@@ -148,7 +148,7 @@
         ],
         "abstract": "Diffusion models (DMs) have achieved state-of-the-art results for image synthesis tasks as well as density estimation. Applied in the latent space of a powerful pretrained autoencoder (LDM), their immense computational requirements can be significantly reduced without sacrificing sampling quality. However, DMs and LDMs lack a semantically meaningful representation space as the diffusion process gradually destroys information in the latent variables. We introduce a framework for learning such representations with diffusion models (LRDM). To that end, a LDM is conditioned on the representation extracted from the clean image by a separate encoder. In particular, the DM and the representation encoder are trained jointly in order to learn rich representations specific to the generative denoising process. By introducing a tractable representation prior, we can efficiently sample from the representation distribution for unconditional image synthesis without training of any additional model. We demonstrate that i) competitive image generation results can be achieved with image-parameterized LDMs, ii) LRDMs are capable of learning semantically meaningful representations, allowing for faithful image reconstructions and semantic interpolations. Our implementation is available at https://github.com/jeremiastraub/diffusion.",
         "file": "researcher/data/pdf/2210.11058v1.Representation_Learning_with_Diffusion_Models.pdf",
-        "images": "researcher/data/jpg/2210.11058v1.Representation_Learning_with_Diffusion_Models"
+        "image_folder": "researcher/data/jpg/2210.11058v1.Representation_Learning_with_Diffusion_Models"
     },
     {
         "title": "Meta-Learning in Neural Networks: A Survey",
@@ -161,7 +161,7 @@
         ],
         "abstract": "The field of meta-learning, or learning-to-learn, has seen a dramatic rise in interest in recent years. Contrary to conventional approaches to AI where tasks are solved from scratch using a fixed learning algorithm, meta-learning aims to improve the learning algorithm itself, given the experience of multiple learning episodes. This paradigm provides an opportunity to tackle many conventional challenges of deep learning, including data and computation bottlenecks, as well as generalization. This survey describes the contemporary meta-learning landscape. We first discuss definitions of meta-learning and position it with respect to related fields, such as transfer learning and hyperparameter optimization. We then propose a new taxonomy that provides a more comprehensive breakdown of the space of meta-learning methods today. We survey promising applications and successes of meta-learning such as few-shot learning and reinforcement learning. Finally, we discuss outstanding challenges and promising areas for future research.",
         "file": "researcher/data/pdf/2004.05439v2.Meta_Learning_in_Neural_Networks_A_Survey.pdf",
-        "images": "researcher/data/jpg/2004.05439v2.Meta_Learning_in_Neural_Networks_A_Survey"
+        "image_folder": "researcher/data/jpg/2004.05439v2.Meta_Learning_in_Neural_Networks_A_Survey"
     },
     {
         "title": "A survey on Bayesian network structure learning from data",
@@ -175,7 +175,7 @@
         ],
         "abstract": "Bayesian Networks (BNs) have become increasingly popular over the last few decades as a tool for reasoning under uncertainty in fields as diverse as medicine, biology, epidemiology, economics and the social sciences. This is especially true in real-world areas where we seek to answer complex questions based on hypothetical evidence to determine actions for intervention. However, determining the graphical structure of a BN remains a major challenge, especially when modelling a problem under causal assumptions. Solutions to this problem include the automated discovery of BN graphs from data, constructing them based on expert knowledge, or a combination of the two. This paper provides a comprehensive review of combinatoric algorithms proposed for learning BN structure from data, describing 74 algorithms including prototypical, well-established and state-of-the-art approaches. The basic approach of each algorithm is described in consistent terms, and the similarities and differences between them highlighted. Methods of evaluating algorithms and their comparative performance are discussed including the consistency of claims made in the literature. Approaches for dealing with data noise in real-world datasets and incorporating expert knowledge into the learning process are also covered.",
         "file": "researcher/data/pdf/2109.11415v2.A_survey_of_Bayesian_Network_structure_learning.pdf",
-        "images": "researcher/data/jpg/2109.11415v2.A_survey_of_Bayesian_Network_structure_learning"
+        "image_folder": "researcher/data/jpg/2109.11415v2.A_survey_of_Bayesian_Network_structure_learning"
     },
     {
         "title": "An information-theoretic analysis of deep latent-variable models",
@@ -190,7 +190,7 @@
         ],
         "abstract": "We present an information-theoretic framework for understanding trade-offs in unsupervised learning of deep latent-variables models using variational inference. This framework emphasizes the need to consider latent-variable models along two dimensions: the ability to reconstruct inputs (distortion) and the communication cost (rate). We derive the optimal frontier of generative models in the two-dimensional rate-distortion plane, and show how the standard evidence lower bound objective is insufficient to select between points along this frontier. However, by performing targeted optimization to learn generative models with different rates, we are able to learn many models that can achieve similar generative performance but make vastly different trade-offs in terms of the usage of the latent variable. Through experiments on MNIST and Omniglot with a variety of architectures, we show how our framework sheds light on many recent proposed extensions to the variational autoencoder family.",
         "file": "researcher/data/pdf/557_an_information_theoretic_analy.pdf",
-        "images": "researcher/data/jpg/557_an_information_theoretic_analy"
+        "image_folder": "researcher/data/jpg/557_an_information_theoretic_analy"
     },
     {
         "title": "On the Measure of Intelligence",
@@ -200,7 +200,7 @@
         ],
         "abstract": "To make deliberate progress towards more intelligent and more human-like artificial systems, we need to be following an appropriate feedback signal: we need to be able to define and evaluate intelligence in a way that enables comparisons between two systems, as well as comparisons with humans. Over the past hundred years, there has been an abundance of attempts to define and measure intelligence, across both the fields of psychology and AI. We summarize and critically assess these definitions and evaluation approaches, while making apparent the two historical conceptions of intelligence that have implicitly guided them. We note that in practice, the contemporary AI community still gravitates towards benchmarking intelligence by comparing the skill exhibited by AIs and humans at specific tasks such as board games and video games. We argue that solely measuring skill at any given task falls short of measuring intelligence, because skill is heavily modulated by prior knowledge and experience: unlimited priors or unlimited training data allow experimenters to \"buy\" arbitrary levels of skills for a system, in a way that masks the system's own generalization power. We then articulate a new formal definition of intelligence based on Algorithmic Information Theory, describing intelligence as skill-acquisition efficiency and highlighting the concepts of scope, generalization difficulty, priors, and experience. Using this definition, we propose a set of guidelines for what a general AI benchmark should look like. Finally, we present a benchmark closely following these guidelines, the Abstraction and Reasoning Corpus (ARC), built upon an explicit set of priors designed to be as close as possible to innate human priors. We argue that ARC can be used to measure a human-like form of general fluid intelligence and that it enables fair general intelligence comparisons between AI systems and humans.",
         "file": "researcher/data/pdf/1911.01547.pdf",
-        "images": "researcher/data/jpg/1911.01547"
+        "image_folder": "researcher/data/jpg/1911.01547"
     },
     {
         "title": "Extracting Training Data from Diffusion Models",
@@ -218,7 +218,7 @@
         ],
         "abstract": "Image diffusion models such as DALL-E 2, Imagen, and Stable Diffusion have attracted significant attention due to their ability to generate high-quality synthetic images. In this work, we show that diffusion models memorize individual images from their training data and emit them at generation time. With a generate-and-filter pipeline, we extract over a thousand training examples from state-of-the-art models, ranging from photographs of individual people to trademarked company logos. We also train hundreds of diffusion models in various settings to analyze how different modeling and data decisions affect privacy. Overall, our results show that diffusion models are much less private than prior generative models such as GANs, and that mitigating these vulnerabilities may require new advances in privacy-preserving training.",
         "file": "researcher/data/pdf/2301.13188.pdf",
-        "images": "researcher/data/jpg/2301.13188"
+        "image_folder": "researcher/data/jpg/2301.13188"
     },
     {
         "title": "Auto-Encoding Variational Bayes",
@@ -229,7 +229,7 @@
         ],
         "abstract": "How can we perform efficient inference and learning in directed probabilistic models, in the presence of continuous latent variables with intractable posterior distributions, and large datasets? We introduce a stochastic variational inference and learning algorithm that scales to large datasets and, under some mild differentiability conditions, even works in the intractable case. Our contributions are two-fold. First, we show that a reparameterization of the variational lower bound yields a lower bound estimator that can be straightforwardly optimized using standard stochastic gradient methods. Second, we show that for i.i.d. datasets with continuous latent variables per datapoint, posterior inference can be made especially efficient by fitting an approximate inference model (also called a recognition model) to the intractable posterior using the proposed lower bound estimator. Theoretical advantages are reflected in experimental results.",
         "file": "researcher/data/pdf/1312.6114v11.Auto_Encoding_Variational_Bayes.pdf",
-        "images": "researcher/data/jpg/1312.6114v11.Auto_Encoding_Variational_Bayes"
+        "image_folder": "researcher/data/jpg/1312.6114v11.Auto_Encoding_Variational_Bayes"
     },
     {
         "title": "Beyond neural scaling laws: beating power law scaling via data pruning",
@@ -243,7 +243,7 @@
         ],
         "abstract": "Widely observed neural scaling laws, in which error falls off as a power of the training set size, model size, or both, have driven substantial performance improvements in deep learning. However, these improvements through scaling alone require considerable costs in compute and energy. Here we focus on the scaling of error with dataset size and show how in theory we can break beyond power law scaling and potentially even reduce it to exponential scaling instead if we have access to a high-quality data pruning metric that ranks the order in which training examples should be discarded to achieve any pruned dataset size. We then test this improved scaling prediction with pruned dataset size empirically, and indeed observe better than power law scaling in practice on ResNets trained on CIFAR-10, SVHN, and ImageNet. Next, given the importance of finding high-quality pruning metrics, we perform the first large-scale benchmarking study of ten different data pruning metrics on ImageNet. We find most existing high performing metrics scale poorly to ImageNet, while the best are computationally intensive and require labels for every image. We therefore developed a new simple, cheap and scalable self-supervised pruning metric that demonstrates comparable performance to the best supervised metrics. Overall, our work suggests that the discovery of good data-pruning metrics may provide a viable path forward to substantially improved neural scaling laws, thereby reducing the resource costs of modern deep learning.",
         "file": "researcher/data/pdf/2206.14486v5.Beyond_neural_scaling_laws_beating_power_law_scaling_via_data_pruning.pdf",
-        "images": "researcher/data/jpg/2206.14486v5.Beyond_neural_scaling_laws_beating_power_law_scaling_via_data_pruning"
+        "image_folder": "researcher/data/jpg/2206.14486v5.Beyond_neural_scaling_laws_beating_power_law_scaling_via_data_pruning"
     },
     {
         "title": "Information dropout: Learning optimal representations through noisy computation",
@@ -254,7 +254,7 @@
         ],
         "abstract": "The cross-entropy loss commonly used in deep learning is closely related to the defining properties of optimal representations, but does not enforce some of the key properties. We show that this can be solved by adding a regularization term, which is in turn related to injecting multiplicative noise in the activations of a Deep Neural Network, a special case of which is the common practice of dropout. We show that our regularized loss function can be efficiently minimized using Information Dropout, a generalization of dropout rooted in information theoretic principles that automatically adapts to the data and can better exploit architectures of limited capacity. When the task is the reconstruction of the input, we show that our loss function yields a Variational Autoencoder as a special case, thus providing a link between representation learning, information theory and variational inference. Finally, we prove that we can promote the creation of disentangled representations simply by enforcing a factorized prior, a fact that has been observed empirically in recent work. Our experiments validate the theoretical intuitions behind our method, and we find that information dropout achieves a comparable or better generalization performance than binary dropout, especially on smaller models, since it can automatically adapt the noise to the structure of the network, as well as to the test sample.",
         "file": "researcher/data/pdf/1611.01353.pdf",
-        "images": "researcher/data/jpg/1611.01353"
+        "image_folder": "researcher/data/jpg/1611.01353"
     },
     {
         "title": "Uncertainty in the Variational Information Bottleneck",
@@ -266,7 +266,7 @@
         ],
         "abstract": "We present a simple case study, demonstrating that Variational Information Bottleneck (VIB) can improve a network's classification calibration as well as its ability to detect out-of-distribution data. Without explicitly being designed to do so, VIB gives two natural metrics for handling and quantifying uncertainty.",
         "file": "researcher/data/pdf/1612.00410v7.Deep_Variational_Information_Bottleneck.pdf",
-        "images": "researcher/data/jpg/1612.00410v7.Deep_Variational_Information_Bottleneck"
+        "image_folder": "researcher/data/jpg/1612.00410v7.Deep_Variational_Information_Bottleneck"
     },
     {
         "title": "Hierarchical Self-supervised Representation Learning for Movie Understanding",
@@ -279,7 +279,7 @@
         ],
         "abstract": "Most self-supervised video representation learning approaches focus on action recognition. In contrast, in this paper we focus on self-supervised video learning for movie understanding and propose a novel hierarchical self-supervised pretraining strategy that separately pretrains each level of our hierarchical movie understanding model (based on [37]). Specifically, we propose to pretrain the low-level video backbone using a contrastive learning objective, while pretrain the higher-level video contextualizer using an event mask prediction task, which enables the usage of different data sources for pretraining different levels of the hierarchy. We first show that our self-supervised pretraining strategies are effective and lead to improved performance on all tasks and metrics on VidSitu benchmark [37] (e.g., improving on semantic role prediction from 47% to 61% CIDEr scores). We further demonstrate the effectiveness of our contextualized event features on LVU tasks [54], both when used alone and when combined with instance features, showing their complementarity.",
         "file": "researcher/data/pdf/2204.03101v1.Hierarchical_Self_supervised_Representation_Learning_for_Movie_Understanding.pdf",
-        "images": "researcher/data/jpg/2204.03101v1.Hierarchical_Self_supervised_Representation_Learning_for_Movie_Understanding"
+        "image_folder": "researcher/data/jpg/2204.03101v1.Hierarchical_Self_supervised_Representation_Learning_for_Movie_Understanding"
     },
     {
         "title": "Pre-Train Your Loss: Easy Bayesian Transfer Learning with Informative Priors",
@@ -295,7 +295,7 @@
         ],
         "abstract": "Deep learning is increasingly moving towards a transfer learning paradigm whereby large foundation models are fine-tuned on downstream tasks, starting from an initialization learned on the source task. But an initialization contains relatively little information about the source task. Instead, we show that we can learn highly informative posteriors from the source task, through supervised or self-supervised approaches, which then serve as the basis for priors that modify the whole loss surface on the downstream task. This simple modular approach enables significant performance gains and more data-efficient learning on a variety of downstream classification and segmentation tasks, serving as a drop-in replacement for standard pre-training strategies. These highly informative priors also can be saved for future use, similar to pre-trained weights, and stand in contrast to the zero-mean isotropic uninformative priors that are typically used in Bayesian deep learning.",
         "file": "researcher/data/pdf/2205.10279v1.Pre_Train_Your_Loss_Easy_Bayesian_Transfer_Learning_with_Informative_Priors.pdf",
-        "images": "researcher/data/jpg/2205.10279v1.Pre_Train_Your_Loss_Easy_Bayesian_Transfer_Learning_with_Informative_Priors"
+        "image_folder": "researcher/data/jpg/2205.10279v1.Pre_Train_Your_Loss_Easy_Bayesian_Transfer_Learning_with_Informative_Priors"
     },
     {
         "title": "Diffusion-Based Representation Learning",
@@ -309,7 +309,7 @@
         ],
         "abstract": "Diffusion-based methods represented as stochastic differential equations on a continuous-time domain have recently proven successful as a non-adversarial generative model. Training such models relies on denoising score matching, which can be seen as multi-scale denoising autoencoders. Here, we augment the denoising score matching framework to enable representation learning without any supervised signal. GANs and VAEs learn representations by directly transforming latent codes to data samples. In contrast, the introduced diffusion-based representation learning relies on a new formulation of the denoising score matching objective and thus encodes the information needed for denoising. We illustrate how this difference allows for manual control of the level of details encoded in the representation. Using the same approach, we propose to learn an infinite-dimensional latent code that achieves improvements of state-of-the-art models on semi-supervised image classification. We also compare the quality of learned representations of diffusion score matching with other methods like autoencoder and contrastively trained systems through their performances on downstream tasks.",
         "file": "researcher/data/pdf/2105.14257v3.Diffusion_Based_Representation_Learning.pdf",
-        "images": "researcher/data/jpg/2105.14257v3.Diffusion_Based_Representation_Learning"
+        "image_folder": "researcher/data/jpg/2105.14257v3.Diffusion_Based_Representation_Learning"
     },
     {
         "title": "Improving Self-Supervised Learning by Characterizing Idealized Representations",
@@ -322,7 +322,7 @@
         ],
         "abstract": "Despite the empirical successes of self-supervised learning (SSL) methods, it is unclear what characteristics of their representations lead to high downstream accuracies. In this work, we characterize properties that SSL representations should ideally satisfy. Specifically, we prove necessary and sufficient conditions such that for any task invariant to given data augmentations, desired probes (e.g., linear or MLP) trained on that representation attain perfect accuracy. These requirements lead to a unifying conceptual framework for improving existing SSL methods and deriving new ones. For contrastive learning, our framework prescribes simple but significant improvements to previous methods such as using asymmetric projection heads. For non-contrastive learning, we use our framework to derive a simple and novel objective. Our resulting SSL algorithms outperform baselines on standard benchmarks, including SwAV+multicrops on linear probing of ImageNet.",
         "file": "researcher/data/pdf/2209.06235.pdf",
-        "images": "researcher/data/jpg/2209.06235"
+        "image_folder": "researcher/data/jpg/2209.06235"
     },
     {
         "title": "Variational Diffusion Models",
@@ -335,7 +335,7 @@
         ],
         "abstract": "Diffusion-based generative models have demonstrated a capacity for perceptually impressive synthesis, but can they also be great likelihood-based models? We answer this in the affirmative, and introduce a family of diffusion-based generative models that obtain state-of-the-art likelihoods on standard image density estimation benchmarks. Unlike other diffusion-based models, our method allows for efficient optimization of the noise schedule jointly with the rest of the model. We show that the variational lower bound (VLB) simplifies to a remarkably short expression in terms of the signal-to-noise ratio of the diffused data, thereby improving our theoretical understanding of this model class. Using this insight, we prove an equivalence between several models proposed in the literature. In addition, we show that the continuous-time VLB is invariant to the noise schedule, except for the signal-to-noise ratio at its endpoints. This enables us to learn a noise schedule that minimizes the variance of the resulting VLB estimator, leading to faster optimization. Combining these advances with architectural improvements, we obtain state-of-the-art likelihoods on image density estimation benchmarks, outperforming autoregressive models that have dominated these benchmarks for many years, with often significantly faster optimization. In addition, we show how to use the model as part of a bits-back compression scheme, and demonstrate lossless compression rates close to the theoretical optimum. Code is available at https://github.com/google-research/vdm .",
         "file": "researcher/data/pdf/2107.00630v5.Variational_Diffusion_Models.pdf",
-        "images": "researcher/data/jpg/2107.00630v5.Variational_Diffusion_Models"
+        "image_folder": "researcher/data/jpg/2107.00630v5.Variational_Diffusion_Models"
     },
     {
         "title": "Understanding Deep Learning (Still) Requires Rethinking Generalization",
@@ -349,7 +349,7 @@
         ],
         "abstract": "Despite their massive size, successful deep artificial neural networks can exhibit a remarkably small gap between training and test performance. Conventional wisdom attributes small generalization error either to properties of the model family or to the regularization techniques used during training. Through extensive systematic experiments, we show how these traditional approaches fail to explain why large neural networks generalize well in practice. Specifically, our experiments establish that state-of-the-art convolutional networks for image classification trained with stochastic gradient methods easily fit a random labeling of the training data. This phenomenon is qualitatively unaffected by explicit regularization and occurs even if we replace the true images by completely unstructured random noise. We corroborate these experimental findings with a theoretical construction showing that simple depth two neural networks already have perfect finite sample expressivity as soon as the number of parameters exceeds the number of data points as it usually does in practice. We interpret our experimental findings by comparison with traditional models.",
         "file": "researcher/data/pdf/Understanding Deep Learning (Still) Requires Rethinking Generalization.pdf",
-        "images": "researcher/data/jpg/Understanding Deep Learning (Still) Requires Rethinking Generalization"
+        "image_folder": "researcher/data/jpg/Understanding Deep Learning (Still) Requires Rethinking Generalization"
     },
     {
         "title": "Test-Time Adaptation via Self-Training with Nearest Neighbor Information",
@@ -360,7 +360,7 @@
         ],
         "abstract": "Adapting trained classifiers using only online test data is important since it is difficult to access training data or future test data during test time. One of the popular approaches for test-time adaptation is self-training, which fine-tunes the trained classifiers using the classifier predictions of the test data as pseudo labels. However, under the test-time domain shift, self-training methods have a limitation that learning with inaccurate pseudo labels greatly degrades the performance of the adapted classifiers. To overcome this limitation, we propose a novel test-time adaptation method Test-time Adaptation via Self-Training with nearest neighbor information (TAST). Based on the idea that a test data and its nearest neighbors in the embedding space of the trained classifier are more likely to have the same label, we adapt the trained classifier with the following two steps: (1) generate the pseudo label for the test data using its nearest neighbors from a set composed of previous test data, and (2) fine-tune the trained classifier with the pseudo label. Our experiments on two standard benchmarks, i.e., domain generalization and image corruption benchmarks, show that TAST outperforms the current state-of-the-art test-time adaptation methods.",
         "file": "researcher/data/pdf/2207.10792.pdf",
-        "images": "researcher/data/jpg/2207.10792"
+        "image_folder": "researcher/data/jpg/2207.10792"
     },
     {
         "title": "Representational dissimilarity metric spaces for stochastic neural networks",
@@ -375,6 +375,6 @@
         ],
         "abstract": "Adapting trained classifiers using only online test data is important since it is difficult to access training data or future test data during test time. One of the popular approaches for test-time adaptation is self-training, which fine-tunes the trained classifiers using the classifier predictions of the test data as pseudo labels. However, under the test-time domain shift, self-training methods have a limitation that learning with inaccurate pseudo labels greatly degrades the performance of the adapted classifiers. To overcome this limitation, we propose a novel test-time adaptation method Test-time Adaptation via Self-Training with nearest neighbor information (TAST). Based on the idea that a test data and its nearest neighbors in the embedding space of the trained classifier are more likely to have the same label, we adapt the trained classifier with the following two steps: (1) generate the pseudo label for the test data using its nearest neighbors from a set composed of previous test data, and (2) fine-tune the trained classifier with the pseudo label. Our experiments on two standard benchmarks, i.e., domain generalization and image corruption benchmarks, show that TAST outperforms the current state-of-the-art test-time adaptation methods.",
         "file": "researcher/data/pdf/2211.11665.pdf",
-        "images": "researcher/data/jpg/2211.11665"
+        "image_folder": "researcher/data/jpg/2211.11665"
     }
 ]
