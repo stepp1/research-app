@@ -18,6 +18,8 @@ class PDFExtractor:
         self.outfp = sys.stdout if False else io.StringIO()
         self.laparams = LAParams()
         self.device = TextConverter(self.rsrcmgr, self.outfp, laparams=self.laparams)
+        self.interpreter = PDFPageInterpreter(self.rsrcmgr, self.device)
+        self.current_fh = None
 
         self.title = ""
         self.title_line = -1
@@ -50,8 +52,6 @@ class PDFExtractor:
     def extract(self):
         with open(self.pdf_path, "rb") as fh:
             self.current_fh = fh
-            self.interpreter = PDFPageInterpreter(self.rsrcmgr, self.device)
-
             self.get_metadata()
 
         self.device.close()
