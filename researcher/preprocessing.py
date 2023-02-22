@@ -86,9 +86,13 @@ def prep_stem(in_text):
     return t
 
 
-def prep_clause(in_text, custom_clause_word=[]):
+def prep_clause(in_text, custom_clause_word=None):
     clause_reg = r"[\.\!\\\/\|,\?\;\:_\-=+]"
-    clause_words = set(DEFAULT_CLAUSE_WORDS + custom_clause_word)
+    clause_words = (
+        set(DEFAULT_CLAUSE_WORDS + custom_clause_word)
+        if custom_clause_word
+        else DEFAULT_CLAUSE_WORDS
+    )
     clause_sep = f"{clause_reg}{' | '.join(clause_words)}".replace("] ", "]")
     t = []
     for i in in_text:

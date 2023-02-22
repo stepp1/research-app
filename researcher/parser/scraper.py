@@ -29,22 +29,22 @@ def parse(parser: Callable, organic_results_data: Callable):
     for result in parser.css(".gs_r.gs_or.gs_scl"):
         try:
             title: str = result.css_first(".gs_rt").text()
-        except:
+        except ValueError:
             title = None
 
         try:
             title_link: str = result.css_first(".gs_rt a").attrs["href"]
-        except:
+        except ValueError:
             title_link = None
 
         try:
             publication_info: str = result.css_first(".gs_a").text()
-        except:
+        except ValueError:
             publication_info = None
 
         try:
             snippet: str = result.css_first(".gs_rs").text()
-        except:
+        except ValueError:
             snippet = None
 
         try:
