@@ -12,7 +12,6 @@ px.defaults.template = "plotly"
 
 def decompose_tsne(embeddings):
     "Creates and TSNE model and plots it"
-
     tsne_model = TSNE(
         perplexity=3, n_components=2, init="pca", n_iter=2500, random_state=23
     )
@@ -23,7 +22,6 @@ def decompose_tsne(embeddings):
 
 def decompose_umap(embeddings):
     "Creates and TSNE model and plots it"
-
     umap_model = UMAP(n_components=2, random_state=42)
     new_values = umap_model.fit_transform(embeddings)
 
@@ -32,7 +30,6 @@ def decompose_umap(embeddings):
 
 def decompose_pca(embeddings):
     "Creates and TSNE model and plots it"
-
     pca_model = PCA(n_components=2, random_state=42)
     new_values = pca_model.fit_transform(embeddings)
 

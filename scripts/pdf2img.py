@@ -20,7 +20,6 @@ logging.basicConfig(
 
 def extract_from_pdf(pdf_path: Union[str, Path], output_folder=None, prefix=None):
     """Extract images from PDF and save them to output_folder"""
-
     output_folder = Path(pdf_path).parent if output_folder is None else output_folder
     prefix = Path(pdf_path).name.split(".")[0] if prefix is None else prefix
 
@@ -38,7 +37,6 @@ def extract_from_pdf(pdf_path: Union[str, Path], output_folder=None, prefix=None
 
 def extract_from_folder(folder: Union[str, Path], output_folder=None, prefix=None):
     """Extract images from PDFs in a folder and save them to output_folder"""
-
     base_output_folder = Path(folder).parent if output_folder is None else output_folder
 
     all_images = []

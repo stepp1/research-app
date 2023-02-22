@@ -26,7 +26,6 @@ def parse(parser: Callable, organic_results_data: Callable):
     It returns nothing as it appends data to `organic_results_data`,
     which appends it to `organic_results_data` List in the scrape_google_scholar_organic_results() function.
     """
-
     for result in parser.css(".gs_r.gs_or.gs_scl"):
         try:
             title: str = result.css_first(".gs_rt").text()
@@ -123,7 +122,6 @@ def scrape_google_scholar_organic_results(
         print(organic_result['title'])
         print(organic_result['pdf_file'])
     """
-
     # selenium stealth
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
@@ -224,7 +222,6 @@ def serpapi_scrape_google_scholar_organic_results(
         print(result['title'])
         # get other data
     """
-
     if api_key is None:
         raise Exception(
             "Please enter a SerpApi API key to a `api_key` argument. https://serpapi.com/manage-api-key"

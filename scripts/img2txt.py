@@ -81,7 +81,6 @@ def extract_from_dataset(
     ds_card: Dict[str, Union[List[str], str]]
 ) -> Dict[str, Union[List[str], str]]:
     """Extract text from images in dataset card"""
-
     for i, sample in enumerate(ds_card):
         sample_text_path = Path(sample["image_folder"]) / "text.parquet"
 
