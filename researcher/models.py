@@ -42,7 +42,6 @@ def openai_encode(sentences, key=""):
     key = load_key("OPENAI_API_KEY", key)
     model = OpenAIEmbeddings(openai_api_key=key)
     embeddings = model.embed_documents(sentences)
-    # os.environ["OPENAI_API_KEY"] = ""
 
     return embeddings, model
 

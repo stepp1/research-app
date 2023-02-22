@@ -56,7 +56,6 @@ def extract_from_dataset(ds_card: dict, output_folder=None) -> List[str]:
     """Extract images from PDFs in a dataset card and save them to output_folder"""
     all_images = []
     for data in tqdm(ds_card):
-        # print(data["file"], data["image_path"])
         if not Path(data["file"]).exists():
             print(f"File not found: {data['file']}")
             continue

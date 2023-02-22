@@ -126,9 +126,6 @@ reader = easyocr.Reader(["en"], gpu=True, quantize=True)
 torch.compile(reader.detector)
 torch.compile(reader.recognizer)
 
-# mp.set_start_method("spawn", force=True)
-# reader.detector.share_memory()
-# reader.recognizer.share_memory()
 
 
 if __name__ == "__main__":
