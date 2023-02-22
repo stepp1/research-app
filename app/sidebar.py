@@ -65,18 +65,14 @@ def preprocess_sidebar(sentences, data):
         if "Stemming" in pre:
             sentences_processed = prep_stem(sentences_processed)
         if "Clause Separation" in pre:
-            clause_reg_box = st.text_input(
-                "clause sep regex",
-                clause_reg,
-                help="Regex defining separation of clauses within each sentence/line",
-            )
             clause_word_box = st.text_input(
                 "clause sep words",
-                clause_words,
+                DEFAULT_CLAUSE_WORDS,
                 help="Words indicating a clause boundary",
             )
-            clause_sep = f"{clause_reg}{' | '.join(clause_words)}".replace("] ", "]")
-            sentences_processed = prep_clause(sentences_processed)
+            sentences_processed = prep_clause(
+                sentences_processed, custom_clause_word=clause_word_box
+            )
         data["sentences_processed"] = sentences_processed
 
     return use_preproc

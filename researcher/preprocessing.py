@@ -11,6 +11,20 @@ from nltk.tokenize import word_tokenize
 
 random.seed(42)
 
+DEFAULT_CLAUSE_WORDS = [
+    "and",
+    "about",
+    "but",
+    "so",
+    "because",
+    "since",
+    "though",
+    "although",
+    "unless",
+    "however",
+    "until",
+]
+
 
 @st.cache_resource
 def prep_load():
@@ -72,24 +86,10 @@ def prep_stem(in_text):
     return t
 
 
-clause_reg = r"[\.\!\\\/\|,\?\;\:_\-=+]"
-clause_words = [
-    "and",
-    "about",
-    "but",
-    "so",
-    "because",
-    "since",
-    "though",
-    "although",
-    "unless",
-    "however",
-    "until",
-]
-clause_sep = f"{clause_reg}{' | '.join(clause_words)}".replace("] ", "]")
-
-
-def prep_clause(in_text):
+def prep_clause(in_text, custom_clause_word=[]):
+    clause_reg = r"[\.\!\\\/\|,\?\;\:_\-=+]"
+    clause_words = set(DEFAULT_CLAUSE_WORDS + custom_clause_word)
+    clause_sep = f"{clause_reg}{' | '.join(clause_words)}".replace("] ", "]")
     t = []
     for i in in_text:
         for j in re.split(clause_sep, i, flags=re.IGNORECASE):
