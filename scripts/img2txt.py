@@ -131,7 +131,7 @@ torch.compile(reader.recognizer)
 # reader.recognizer.share_memory()
 
 
-if "__main__" == __name__:
+if __name__ == "__main__":
     """
     Extract text from image in a folder, specified image or dataset card.
 

@@ -142,7 +142,7 @@ if __name__ == "__main__":
     ds_card = json.load(open(args.dataset))
     images = extract_from_dataset(ds_card)
 
-    logging.info(f"Done!")
+    logging.info("Done!")
 
     compress_bash = (
         "tar --exclude='pdf/*.pdf' -cvf - **/* | xz -v -6 -z - > data.tar.xz"
