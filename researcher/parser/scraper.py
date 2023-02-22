@@ -269,14 +269,14 @@ def serpapi_scrape_google_scholar_organic_results(
 
         # flatten list
         return list(itertools.chain(*organic_results_data))
-    else:
-        # remove page number key from the JSON response
-        params.pop("start")
 
-        search = GoogleScholarSearch(params)
-        results = search.get_dict()
+    # remove page number key from the JSON response
+    params.pop("start")
 
-        if "error" in results:
-            raise Exception(results["error"])
+    search = GoogleScholarSearch(params)
+    results = search.get_dict()
 
-        return results["organic_results"]
+    if "error" in results:
+        raise Exception(results["error"])
+
+    return results["organic_results"]

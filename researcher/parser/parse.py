@@ -79,19 +79,18 @@ def serpapi_search(query: str):
         arxiv_id = result["link"].split("/")[-1]
         return arxiv_search(arxiv_id)
 
-    else:
-        paper_title = result["title"]
-        paper_url = result["link"]
-        try:
-            paper_authors = [
-                author["name"] for author in result["publication_info"]["authors"]
-            ]
+    paper_title = result["title"]
+    paper_url = result["link"]
+    try:
+        paper_authors = [
+            author["name"] for author in result["publication_info"]["authors"]
+        ]
 
-            paper_first_author = get_authors_str(paper_authors, first_author=True)
-        except KeyError:
-            paper_authors = [""]
-            paper_first_author = ""
-        paper_abstract = result["snippet"]
+        paper_first_author = get_authors_str(paper_authors, first_author=True)
+    except KeyError:
+        paper_authors = [""]
+        paper_first_author = ""
+    paper_abstract = result["snippet"]
 
     paper = {
         "id": arxiv_id if "arxiv" in result["link"] else result["link"],
@@ -191,10 +190,11 @@ def parse_dir(
     for file in Path(dir_path).iterdir():
         if file.suffix == ".pdf":
             paper = extract_paper(file, out_file, **kwargs)
-            if paper is not None:
-                papers.append(paper)
-            else:
+            if paper is None:
                 logging.info(f"Skipping {file}")
+                continue
+
+            papers.append(paper)
 
         sleep(2)  # avoid getting blocked
     return papers
@@ -224,7 +224,6 @@ def parser(
     if is_file:
         logging.info(f"Extracting paper from {path}")
         papers = [extract_paper(path, current_out_file, **kwargs)]
-
     elif is_dir:
         logging.info(f"Extracting papers from directory {path}")
         papers = parse_dir(path, current_out_file, **kwargs)
@@ -232,11 +231,10 @@ def parser(
     if papers is None:
         return None
 
-    elif Path(current_out_file).exists():
+    if Path(current_out_file).exists():
         add_to_json(papers, current_out_file)
     else:
-        with open(current_out_file, "w") as f:
-            json.dump(papers, f, indent=4)
+        json.dump(papers, open(current_out_file, "w"), indent=4)
 
     return papers
 

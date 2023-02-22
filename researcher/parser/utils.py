@@ -128,8 +128,8 @@ def is_complete(line):
         return False
     if line.lower().endswith("surrogate"):
         return False
-    else:
-        return True
+
+    return True
 
 
 def is_parsed(pdf_path, out_file):
