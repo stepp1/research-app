@@ -55,13 +55,13 @@ def check_publisher(text):
         return True
     if "article" in text.lower():
         return True
-    if "open" == text.lower():
+    if text.lower() == "open":
         return True
-    if "open access" == text.lower():
+    if text.lower() == "open access":
         return True
-    if "open-access" == text.lower():
+    if text.lower() == "open-access":
         return True
-    if "original research" == text.lower():
+    if text.lower() == "original research":
         return True
     if "review" in text.lower():
         return True
