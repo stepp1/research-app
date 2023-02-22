@@ -68,13 +68,13 @@ class Embeddings:
 
         # group sentences by cluster
         cluster_sentences = {}
-        for i, cluster in enumerate(self.cluster_assignment):
+        for i, cluster_idx in enumerate(self.cluster_assignment):
             if cluster not in cluster_sentences:
-                cluster_sentences[cluster] = []
-            cluster_sentences[cluster].append(sentences[i])
-        print()
+                cluster_sentences[cluster_idx] = []
+            cluster_sentences[cluster_idx].append(sentences[i])
+
         cluster_tops = {}
-        for cluster_k, cluster_values in cluster_sentences.items():
+        for cluster_idx, cluster_values in cluster_sentences.items():
             # compute tf-idf
             vectorizer = TfidfVectorizer(ngram_range=(2, 2), max_features=1000)
             tfidf = vectorizer.fit_transform(cluster_values)
@@ -84,11 +84,11 @@ class Embeddings:
 
             top_words = [vectorizer.get_feature_names_out()[i] for i in top_words]
 
-            cluster_tops[cluster_k] = top_words
+            cluster_tops[cluster_idx] = top_words
 
         top_words = []
-        for i, cluster in enumerate(self.cluster_assignment):
-            top_words.append(str(cluster_tops[cluster]))
+        for i, cluster_idx in enumerate(self.cluster_assignment):
+            top_words.append(str(cluster_tops[cluster_idx]))
 
         if data is not None:
             data["top_words"] = top_words

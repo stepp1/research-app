@@ -35,20 +35,19 @@ def open_img(path: Union[str, Path]) -> PIL.Image:
 def img2txt(img_path: Union[str, Path], **kwargs) -> str:
     """Extract text from image"""
     logging.info(f"Processing {str(img_path)}")
-    img = open_img(img_path)
-    img = np.array(img)
+    image = np.array(open_img(img_path))
 
-    result = reader.readtext(img, detail=0, paragraph=True, **kwargs)
+    result = reader.readtext(image, detail=0, paragraph=True, **kwargs)
     result = " ".join(result)
     return result
 
 
-def img2txt_batched(img_path: Union[str, Path], batch_size=16, **kwargs) -> str:
-    logging.info(f"Processing {str(img_path)}")
-    imgs = [np.array(open_img(path)) for path in img_path]
+def img2txt_batched(batch_path: List[Union[str, Path]], batch_size=16, **kwargs) -> str:
+    logging.info(f"Processing {str(batch_path)}")
+    images = [np.array(open_img(path)) for path in batch_path]
 
     result = reader.readtext_batched(
-        imgs,
+        images,
         detail=0,
         paragraph=True,
         batch_size=batch_size,
@@ -73,11 +72,6 @@ def list_images(path: Union[str, Path]) -> List[Path]:
     return sorted(images_paths)
 
 
-def extract_text(img_paths: List[Path]) -> List[str]:
-    """Extract text from the given image_folder"""
-    return [img2txt(img) for img in img_paths]
-
-
 def extract_from_dataset(
     dataset: Dict[str, Union[List[str], str]]
 ) -> Dict[str, Union[List[str], str]]:
@@ -97,15 +91,15 @@ def extract_from_dataset(
             logging.info(f"Done in {time.time() - start} seconds")
             continue
 
-        img_paths = list_images(sample["image_folder"])
+        image_paths = list_images(sample["image_folder"])
         batch_size = 16  # max in RTX 3090
-        n_batches = len(img_paths) // batch_size
+        n_batches = len(image_paths) // batch_size
         logging.info(f"Number of batches: {n_batches}")
 
         text = ""
         for j in range(n_batches):
             start_batch = time.time()
-            batch = img_paths[j * batch_size : (j + 1) * batch_size]
+            batch = image_paths[j * batch_size : (j + 1) * batch_size]
             text += img2txt_batched(batch, batch_size)
             logging.info(f"Batch {j} done in {time.time() - start_batch} seconds")
 
@@ -161,15 +155,13 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     if args.image:
-        img = open_img(args.image)
-        text = img2txt()
-        print(text)
+        out_text = img2txt(args.image)
+        print(out_text)
         sys.exit(0)
 
     elif args.folder:
-        img_paths = list_images(args.folder)
-        text = img2txt_batched(img_paths)
-        print(text)
+        out_text = img2txt_batched(list_images(args.folder))
+        print(out_text)
         sys.exit(0)
 
     else:
@@ -184,8 +176,8 @@ if __name__ == "__main__":
         json.dump(ds_card, f)
 
     output_parquet_path = Path(args.dataset).parent / "full_dataset.parquet"
-    df = pd.DataFrame(ds_card)
-    table = pa.Table.from_pandas(df)
-    pq.write_table(table, str(output_parquet_path))
+    out_df = pd.DataFrame(ds_card)
+    out_table = pa.Table.from_pandas(out_df)
+    pq.write_table(out_table, str(output_parquet_path))
 
     logging.info("Done!")

@@ -1,5 +1,6 @@
 import io
 import logging
+import sys
 
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
