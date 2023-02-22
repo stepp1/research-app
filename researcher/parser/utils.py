@@ -17,7 +17,7 @@ def process_ascii(ascii_text):
 
 def get_authors_str(authors, first_author=False):
     output = str()
-    if first_author == False:
+    if first_author is False:
         output = ", ".join(str(author) for author in authors)
     else:
         output = authors[0]
