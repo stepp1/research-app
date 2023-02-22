@@ -6,6 +6,7 @@
 
 import json
 import logging
+import sys
 import time
 from pathlib import Path
 from typing import Dict, List, Union
@@ -163,13 +164,13 @@ if __name__ == "__main__":
         img = open_img(args.image)
         text = img2txt()
         print(text)
-        exit(0)
+        sys.exit(0)
 
     elif args.folder:
         img_paths = list_images(args.folder)
         text = img2txt_batched(img_paths)
         print(text)
-        exit(0)
+        sys.exit(0)
 
     else:
         assert args.dataset, "Please specify dataset card, image or folder."
