@@ -78,11 +78,11 @@ def extract_text(img_paths: List[Path]) -> List[str]:
 
 
 def extract_from_dataset(
-    ds_card: Dict[str, Union[List[str], str]]
+    dataset: Dict[str, Union[List[str], str]]
 ) -> Dict[str, Union[List[str], str]]:
     """Extract text from images in dataset card"""
 
-    for i, sample in enumerate(ds_card):
+    for i, sample in enumerate(dataset):
         sample_text_path = Path(sample["image_folder"]) / "text.parquet"
 
         logging.info(f"Processing {i}th card. {sample['title']}")
@@ -118,18 +118,13 @@ def extract_from_dataset(
         pq.write_table(table, str(sample_text_path))
         logging.info(f"Saved to {sample_text_path}")
 
-    return ds_card
+    return dataset
 
 
 reader = easyocr.Reader(["en"], gpu=True, quantize=True)
 # pytorch 2.0
 torch.compile(reader.detector)
 torch.compile(reader.recognizer)
-
-# mp.set_start_method("spawn", force=True)
-# reader.detector.share_memory()
-# reader.recognizer.share_memory()
-
 
 if __name__ == "__main__":
     """

@@ -5,6 +5,7 @@
 
 import json
 import logging
+import sys
 from pathlib import Path
 from typing import List, Union
 
@@ -52,11 +53,10 @@ def extract_from_folder(folder: Union[str, Path], output_folder=None, prefix=Non
     return all_images
 
 
-def extract_from_dataset(ds_card: dict, output_folder=None) -> List[str]:
+def extract_from_dataset(dataset: dict, output_folder=None) -> List[str]:
     """Extract images from PDFs in a dataset card and save them to output_folder"""
     all_images = []
-    for data in tqdm(ds_card):
-        # print(data["file"], data["image_path"])
+    for data in tqdm(dataset):
         if not Path(data["file"]).exists():
             print(f"File not found: {data['file']}")
             continue
@@ -129,12 +129,12 @@ if __name__ == "__main__":
     if args.pdf:
         images = extract_from_pdf(args.pdf, args.output)
         logging.info(f"Done! Check {args.output}")
-        exit(0)
+        sys.exit(0)
 
     elif args.folder:
         images = extract_from_folder(args.folder, args.output)
         logging.info(f"Done! Check {args.output}")
-        exit(0)
+        sys.exit(0)
 
     else:
         assert args.dataset, "Please specify dataset card, image or folder."

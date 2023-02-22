@@ -253,6 +253,7 @@ def main(arg: argparse.Namespace) -> None:
         parser(arg.pdf_path, is_file=True)
     elif Path(arg.pdf_path).is_dir():
         parser(arg.pdf_path, is_dir=True)
+        parser(arg.pdf_path, is_dir=True)
     else:
         logging.error(f"Path {args.pdf_path} is not a file or a directory")
         sys.exit(1)
