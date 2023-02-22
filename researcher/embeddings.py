@@ -100,8 +100,7 @@ class Embeddings:
         if sentences is None:
             if not self.has_encoded:
                 raise ValueError("No sentences provided")
-            else:
-                sentences = self.sentences
+            sentences = self.sentences
 
         return sentences
 
@@ -109,8 +108,7 @@ class Embeddings:
         if embeddings is None:
             if not self.has_encoded:
                 raise ValueError("No embeddings provided")
-            else:
-                embeddings = self.embeddings
+            embeddings = self.embeddings
 
         return np.array(embeddings)
 
