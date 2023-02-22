@@ -53,11 +53,11 @@ def visualization_plt(embeddings, labels, method="tsne"):
         y.append(value[1])
 
     f, ax = plt.subplots(figsize=(10, 10))
-    for i in range(len(x)):
-        ax.scatter(x[i], y[i])
+    for i, (x_, y_) in enumerate(zip(x, y)):
+        ax.scatter(x_, y_)
         ax.annotate(
             labels[i],
-            xy=(x[i], y[i]),
+            xy=(x_, y_),
             xytext=(5, 2),
             textcoords="offset points",
             ha="right",
