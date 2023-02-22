@@ -239,19 +239,20 @@ def parser(
     return papers
 
 
-def main(args) -> None:
-    """Main function to parse the pdf file or directory path
+def main(arg: argparse.Namespace) -> None:
+    """
+    Main function to parse the pdf file or directory path
 
     Arguments:
-    args (argparse.Namespace): Namespace containing the command line arguments passed to the script
+    arg (argparse.Namespace): Namespace containing the command line arguments passed to the script
 
     Returns:None
     """
     # Check if the path is a file or a directory
-    if Path(args.pdf_path).is_file():
-        parser(args.pdf_path, is_file=True)
-    elif Path(args.pdf_path).is_dir():
-        parser(args.pdf_path, is_dir=True)
+    if Path(arg.pdf_path).is_file():
+        parser(arg.pdf_path, is_file=True)
+    elif Path(arg.pdf_path).is_dir():
+        parser(arg.pdf_path, is_dir=True)
     else:
         logging.error(f"Path {args.pdf_path} is not a file or a directory")
         sys.exit(1)
