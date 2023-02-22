@@ -157,7 +157,7 @@ def extract_paper(
     logging.info(f"Extracting paper from {pdf_path}")
 
     if is_parsed(pdf_path, out_file):
-        logging.info(f"Already parsed")
+        logging.info("Already parsed")
         return None
 
     extractor = PDFExtractor(pdf_path)
@@ -166,7 +166,7 @@ def extract_paper(
     try:
         paper = get_paper_metadata(title.lower(), next_line=next_line.lower(), **kwargs)
         paper["file"] = str(pdf_path)
-        logging.info(f"Confirmed")
+        logging.info("Confirmed")
 
     except Exception as e:
         paper = None

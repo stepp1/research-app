@@ -140,7 +140,7 @@ def is_parsed(pdf_path, out_file):
         result_json = json.load(open(out_file, "r"))
         for paper in result_json:
             if paper["file"] == str(pdf_path):
-                logging.info(f"Paper already extracted")
+                logging.info("Paper already extracted")
                 return True
     return False
 
