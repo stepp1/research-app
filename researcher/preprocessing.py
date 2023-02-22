@@ -72,7 +72,7 @@ def prep_stem(in_text):
     return t
 
 
-clause_reg = "[\.\!\\\/\|,\?\;\:_\-=+]"
+clause_reg = r"[\.\!\\\/\|,\?\;\:_\-=+]"
 clause_words = [
     "and",
     "about",
