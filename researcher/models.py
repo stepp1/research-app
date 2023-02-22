@@ -66,6 +66,6 @@ def embeddings_encode(model_name, sentences, clustering=False, key=""):
         embeddings = huggingface_encode(sentences)
 
     else:
-        raise ValueError("Unknown model name: {}".format(model_name))
+        raise ValueError(f"Unknown model name: {model_name}")
 
     return embeddings

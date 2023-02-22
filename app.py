@@ -2,7 +2,6 @@ import logging
 import random
 import time
 
-import numpy as np
 import streamlit as st
 
 from app.sidebar import (
@@ -131,9 +130,7 @@ def main():
                 st.markdown(f"* Link: {paper['url']}")
                 st.markdown(" ")
 
-    logging.info(
-        "App loaded. Loading time: {:.2f} seconds".format(time.time() - start_time)
-    )
+    logging.info(f"App loaded. Loading time: {time.time() - start_time:.2f} seconds")
 
 
 if __name__ == "__main__":

@@ -39,7 +39,7 @@ class Embeddings:
         return embeddings
 
     def cluster(self, embeddings=None, method_name="kmeans", **kwargs):
-        logging.info("Clustering with {}".format(str(method_name) + "_assignment"))
+        logging.info(f"Clustering with {str(method_name) + '_assignment'}")
 
         embeddings = self.check_embeddings(embeddings)
 

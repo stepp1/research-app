@@ -16,7 +16,6 @@ __all__ = [
     "parse_dir",
     "parser",
     "serpapi_search",
-    "instructor_encode",
     "Embeddings",
     "embeddings_encode",
     "embeddings_kmeans",
