@@ -18,8 +18,7 @@ Author: @stepp1
 - TODOs:
   - Improve: full text extraction
   - Improve: data pipelines
-  - App: move to a more flexible framework (e.g. Flask)
-  - App: hide sidebar when not in use
+  - App: decide if re-implement in a more flexible framework (e.g. Flask or FastAPI)
   - App: add a "per paper" chat w/ pdf viewer
   - Testing: add tests for data processing, embeddings, etc.
 
@@ -42,9 +41,10 @@ conda env create -f environment.yml
 conda activate researcher
 ```
 
-4. Run the app
+4. Run the apps
 ```bash
-streamlit run app.py
+chmod +x run.sh
+./run.sh
 ```
 
 Remember to forward the port for streamlit if you are running it on a server!
