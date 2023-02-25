@@ -1,9 +1,13 @@
 # Researcher App
 An app that aims to organize your research: *A Researcher with a Paper Based Approach*
 
-<center> <img src="./app/app.png" width="1000px"></img></center>
-
 Author: @stepp1
+
+
+<center> <img src="./app/assets/images/app-short.png" width="1000px"></img></center>
+<center> <img src="./app/assets/images/paper-explorer.png" width="1000px"></img></center>
+<center> <img src="./app/assets/images/chat.png" width="1000px"></img></center>
+
 
 
 # Table of Contents
@@ -12,8 +16,11 @@ Author: @stepp1
 
 # Status
 - TODOs:
-  - Title and Full Text embeddings
-  - Better Viz
+  - Improve: full text extraction
+  - Improve: data pipelines
+  - App: move to a more flexible framework (e.g. Flask)
+  - App: hide sidebar when not in use
+  - App: add a "per paper" chat w/ pdf viewer
 
 # Installation
 1. Clone the repository

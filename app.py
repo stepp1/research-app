@@ -136,20 +136,20 @@ def main():
             st.session_state.chat_history = []
         else:
             st.session_state.count += 1
-
-        store = load_vectorstore(source)
-        out_dict = start_conversation(
-            prompt,
-            chat_history=st.session_state.chat_history,
-            vectorstore=store,
-            model=model_name,
-            temp=model_temp,
-        )
-        st.session_state.chat_history = (
-            st.session_state.chat_history + out_dict["chat_history"]
-        )
-        st.write(out_dict["answer"])
-        print(out_dict)
+        if prompt != "":
+            store = load_vectorstore(source)
+            out_dict = start_conversation(
+                prompt,
+                chat_history=st.session_state.chat_history,
+                vectorstore=store,
+                model=model_name,
+                temp=model_temp,
+            )
+            st.session_state.chat_history = (
+                st.session_state.chat_history + out_dict["chat_history"]
+            )
+            st.write(out_dict["answer"])
+            print(out_dict)
 
     with tab3:
         st.subheader("Current Papers")
