@@ -24,6 +24,9 @@ Author: @stepp1
   - Testing: add tests for data processing, embeddings, etc.
 
 # Installation
+
+You will need a `.env` file with the required keys: `HUGGINGFACEHUB_API_TOKEN`, `OPENAI_API_KEY`.
+
 1. Clone the repository
 ```bash
 git clone git@github.com:stepp1/research-app.git
