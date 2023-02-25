@@ -56,11 +56,17 @@ class Embeddings:
         return cluster_assignment
 
     def agglomerative_assignment(
-        self, embeddings=None, n_clusters=4, linkage="average"
+        self, embeddings=None, n_clusters=4, linkage="average", metric=None
     ):
         self.cluster_method = "agglomerative"
         embeddings = self.check_embeddings(embeddings)
-        cluster_assignment = vectors_agglomerative(embeddings, n_clusters, linkage)
+        cluster_assignment = vectors_agglomerative(
+            embeddings,
+            n_clusters,
+            metric=metric,
+            use_connectivity=False,
+            linkage=linkage,
+        )
         return cluster_assignment
 
     def dbscan_assignment(self, embeddings=None, eps=0.5, min_samples=4):

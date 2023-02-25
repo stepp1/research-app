@@ -20,10 +20,10 @@ def vectors_agglomerative(
     vectors,
     n_clusters=4,
     metric: str = None,
-    use_connnectivity: bool = False,
+    use_connectivity: bool = False,
     linkage="average",
 ):
-    if use_connnectivity:
+    if use_connectivity:
         # TODO: needs more testing connectivity = sklearn.neighbors.kneighbors_graph(vectors, 3, include_self=False)
         raise NotImplementedError("Connectivity not implemented yet")
 
