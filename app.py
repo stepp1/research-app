@@ -2,8 +2,10 @@ import logging
 import random
 import time
 
+import pandas as pd
 import streamlit as st
 
+from app.paper_explorer import paper_explorer
 from app.sidebar import (
     embeddings_sidebar,
     model_mapping,
@@ -11,9 +13,8 @@ from app.sidebar import (
     upload_sidebar,
     visualization_sidebar,
 )
-from researcher import visualization_plotly
+from researcher.chat import load_vectorstore, start_conversation
 from researcher.parser.utils import get_authors_str
-from researcher.preprocessing import *
 
 st.set_page_config(layout="wide")
 random.seed(42)
@@ -24,18 +25,10 @@ logging.basicConfig(
 start_time = time.time()
 st.title("Machine Learning Research: A Paper based Approach")
 
-data_source = st.selectbox(
-    "Data Source (Currently only Abstracts are supported)",
-    ["Abstract"],  # ["Title", "Abstract", "Full Text"],
-    help="Choose the data source for the pipeline",
-    format_func=lambda x: x.title(),
-)
-if data_source == "Abstract":
-    current_out_file = "researcher/data/dataset.json"
-else:
-    current_out_file = "researcher/data/dataset.json"
+current_out_file = "researcher/data/dataset.json"
 
-logging.info(f"Using {data_source} as data source. Loaded from {current_out_file}")
+
+logging.info(f"Loaded {current_out_file}")
 
 
 data = pd.DataFrame(
@@ -45,7 +38,7 @@ data = pd.DataFrame(
         "title",
         "embeddings",
         "cluster_assignment",
-        "top_words",
+        "topwords",
     ]
 )
 
@@ -88,27 +81,75 @@ def main():
 
     st.write(font_css, unsafe_allow_html=True)
 
-    tab1, tab2, tab3 = st.tabs(["📈 Visualization", "PaperChat", "🗃 Papers"])
+    tab1, tab2, tab3 = st.tabs(["📈 Visualization", "🦜PaperChat", "📄 Papers"])
 
     with tab1:
-        st.subheader("Paper Explorer")
+        data = paper_explorer(data, model, model_mapping, model_name)
 
-        logging.info("Clustering embeddings")
+    with tab2:
+        st.subheader("PaperChat")
 
-        # get top words
-        data = model.get_top_words(sentences=data["sentences_processed"], data=data)
-
-        data["color"] = data["top_words"]
-        data["label"] = data["title"]
-
-        mod_model_name = {v: k for k, v in model_mapping.items()}[model_name]
-        title_add = f" - {mod_model_name}"
-        fig = visualization_plotly(
-            data=data, decompose_method=data.decompose_method, title_add=title_add
+        data_source = st.selectbox(
+            "Data Source",
+            ["Abstract", "Full Text"],
+            help="Choose the data source for the pipeline",
+            format_func=lambda x: x.title(),
         )
 
-        logging.info("Plotting visualization")
-        st.plotly_chart(fig, use_container_width=True)
+        if data_source == "Abstract":
+            source = "abstract"
+        else:
+            source = "paper"
+
+        llm_model = st.selectbox(
+            "Language Model",
+            # TODO: keep working on llm.ipynb ["Flan-T5", "OpenAI GPT", "GPT-Neo", "GPT-J"],
+            ["OpenAI GPT"],
+            help="Choose the language model for the pipeline",
+        )
+
+        llm_mapping = {
+            "OpenAI GPT": "openai-gpt",
+            "GPT-Neo": "EleutherAI/gpt-neo-125M",
+            "GPT-J": "EleutherAI/gpt-j-6B",
+            "Flan-T5": "google/flan-t5-xxl",
+        }
+        model_name = llm_mapping[llm_model]
+        model_temp = st.slider(
+            "Temperature",
+            min_value=0.0,
+            max_value=1.0,
+            value=0.0,
+            step=0.1,
+            help="Temperature for the language model",
+        )
+
+        st.write("Welcome to the PaperChat LLM. Ask a question about a paper!")
+        prompt = st.text_input(
+            "Prompt/Query:",
+            value="List the main takeaways from these papers. Group them by topic.",
+        )
+
+        if "count" not in st.session_state or st.session_state.count == 6:
+            st.session_state.count = 0
+            st.session_state.docs = None
+            st.session_state.chat_history = []
+        else:
+            st.session_state.count += 1
+
+        store = load_vectorstore(source)
+        out_dict = start_conversation(
+            prompt,
+            chat_history=st.session_state.chat_history,
+            vectorstore=store,
+            model=model_name,
+            temp=model_temp,
+        )
+        st.session_state.chat_history = (
+            st.session_state.chat_history + out_dict["chat_history"]
+        )
+        st.write(out_dict["answer"])
+        print(out_dict)
 
     with tab3:
         st.subheader("Current Papers")

@@ -10,28 +10,59 @@ from umap import UMAP
 px.defaults.template = "plotly"
 
 
-def decompose_tsne(embeddings):
+def decompose_tsne(vector, return_series=False):
     "Creates and TSNE model and plots it"
+    if isinstance(vector, pd.Series):
+        return_series = True
+        vector = np.vstack(vector.values)
+
     tsne_model = TSNE(
-        perplexity=3, n_components=2, init="pca", n_iter=2500, random_state=23
+        n_components=2,
+        perplexity=3,
+        init="pca",
+        min_grad_norm=1e-07,
+        metric="euclidean",
+        random_state=42,
+        n_iter=1000,
+        n_iter_without_progress=300,
+        method="barnes_hut",
+        angle=0.5,
+        n_jobs=-1,
     )
-    new_values = tsne_model.fit_transform(embeddings)
+    new_values = tsne_model.fit_transform(vector)
+
+    if return_series:
+        new_values = pd.Series(new_values)
 
     return new_values
 
 
-def decompose_umap(embeddings):
-    "Creates and TSNE model and plots it"
+def decompose_umap(vector, return_series=False):
+    "Decomposes the embeddings using UMAP"
+    if isinstance(vector, pd.Series):
+        return_series = True
+        vector = np.vstack(vector.values)
+
     umap_model = UMAP(n_components=2, random_state=42)
-    new_values = umap_model.fit_transform(embeddings)
+    new_values = umap_model.fit_transform(vector)
+
+    if return_series:
+        new_values = pd.Series(new_values)
 
     return new_values
 
 
-def decompose_pca(embeddings):
-    "Creates and TSNE model and plots it"
+def decompose_pca(vector, return_series=False):
+    "Decomposes the embeddings using PCA"
+    if isinstance(vector, pd.Series):
+        return_series = True
+        vector = np.vstack(vector.values)
+
     pca_model = PCA(n_components=2, random_state=42)
-    new_values = pca_model.fit_transform(embeddings)
+    new_values = pca_model.fit_transform(vector)
+
+    if return_series:
+        new_values = pd.Series(new_values)
 
     return new_values
 
@@ -39,81 +70,64 @@ def decompose_pca(embeddings):
 decompose_funcs = {"tsne": decompose_tsne, "umap": decompose_umap, "pca": decompose_pca}
 
 
-def visualization_plt(embeddings, labels, method="tsne"):
-    decompose = decompose_funcs[method]
-    new_values = decompose(embeddings)
-
-    x = []
-    y = []
-    for value in new_values:
-        x.append(value[0])
-        y.append(value[1])
-
-    f, ax = plt.subplots(figsize=(10, 10))
-    for i, (x_, y_) in enumerate(zip(x, y)):
-        ax.scatter(x_, y_)
-        ax.annotate(
-            labels[i],
-            xy=(x_, y_),
-            xytext=(5, 2),
-            textcoords="offset points",
-            ha="right",
-            va="bottom",
-        )
-    plt.show()
-
-    return f
-
-
-def visualization_plotly(
-    data=None,
+def scatterplot(
+    data_frame=None,
     embeddings=None,
+    hover_name="label",
     labels=None,
     color=None,
     decompose_method="tsne",
     show_legend=True,
-    show_=False,
+    return_figure=False,
     title_add="",
 ):
-    if data is not None:
-        embeddings = np.array(data["embeddings"].values.tolist())
-        labels = data["label"]
-        color = data["color"]
+    if data_frame is not None:
+        embeddings = data_frame["embeddings"].to_numpy()
+        if hover_name == "label":
+            hover_name = data_frame["label"].to_numpy()
+
     else:
-        assert embeddings is not None
-        assert labels is not None
-        assert color is not None
-        data = pd.DataFrame(
+        try:
+            assert embeddings is not None
+            assert labels is not None
+            assert color is not None
+        except AssertionError:
+            raise AssertionError(
+                "You must pass either a data_frame or embeddings, labels, and color"
+            )
+
+        data_frame = pd.DataFrame(
             columns=["component_1", "component_2"],
         )
-        data["labels"] = labels
-        data["color"] = color
+        data_frame[hover_name] = labels
+        data_frame["color"] = color
 
-    embeddings = MinMaxScaler().fit_transform(embeddings)
+    embeddings = MinMaxScaler().fit_transform(embeddings.tolist())
     decompose = decompose_funcs[decompose_method]
     new_values = decompose(embeddings)
-    data["component_1"] = new_values[:, 0]
-    data["component_2"] = new_values[:, 1]
-
-    labels_str = [str(i) for i in labels]
+    data_frame["component_1"] = new_values[:, 0]
+    data_frame["component_2"] = new_values[:, 1]
 
     fig = px.scatter(
-        data_frame=data,
+        data_frame=data_frame,
         x="component_1",
         y="component_2",
-        color="top_words",
-        hover_name=labels_str,
+        color=color,
+        hover_name=hover_name,
     )
     # hide x and y axis
     fig.update_xaxes(showticklabels=False, visible=False)
     fig.update_yaxes(showticklabels=False, visible=False)
 
+    # hide legend
     fig.update_layout(showlegend=show_legend)
 
+    # custom title and size
     fig.update_layout(
         title=f"Visualization of Abstract's{title_add}", height=500, width=1000
     )
-    if show_:
-        fig.show()
 
-    return fig
+    if return_figure:
+        return fig
+
+    fig.show()

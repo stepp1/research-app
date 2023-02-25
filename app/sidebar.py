@@ -6,7 +6,8 @@ import streamlit as st
 
 from researcher import Embeddings, extract_paper
 from researcher.parser.utils import add_to_json
-from researcher.preprocessing import *
+from researcher.representations.preprocessing import *
+from researcher.representations.stopwords import prep_load
 
 clustering_mapping = {
     "K-Means": "kmeans",
@@ -41,14 +42,14 @@ def upload_sidebar(current_out_file):
 def preprocess_sidebar(sentences, data):
     ## preprocessing
     with st.expander("Preprocessing", True):
-        sentences_processed = sentences
+        data["sentences_processed"] = sentences
         use_preproc = st.checkbox(
             "Use Preprocessing Steps to compute embeddings?",
             False,
             help="Use preprocessing steps to compute embeddings? If not, embeddings will be computed on raw data",
         )
         pre = st.multiselect(
-            "Preprocessing Steps\n Default steps: Stopwords, Punctuation",
+            "Preprocessing Steps\n Default steps: Stopwords, Punctuation, Lowercase, Remove Digits, Remove Whitespace",
             [
                 "Lemmatization",
                 "Stemming",
@@ -58,22 +59,22 @@ def preprocess_sidebar(sentences, data):
             help="Preprocessing steps to apply to provided data",
         )
         prep_load()
-        sentences_processed = prep_stop(sentences_processed)
+
+        data["sentences_processed"] = clean(data["sentences_processed"])
 
         if "Lemmatization" in pre:
-            sentences_processed = prep_lemma(sentences_processed)
+            data["sentences_processed"] = build_lemma(data["sentences_processed"])
         if "Stemming" in pre:
-            sentences_processed = prep_stem(sentences_processed)
+            data["sentences_processed"] = build_stem(data["sentences_processed"])
         if "Clause Separation" in pre:
             clause_word_box = st.text_input(
                 "clause sep words",
                 DEFAULT_CLAUSE_WORDS,
                 help="Words indicating a clause boundary",
             )
-            sentences_processed = prep_clause(
+            sentences_processed = build_clause(
                 sentences_processed, custom_clause_word=clause_word_box
             )
-        data["sentences_processed"] = sentences_processed
 
     return use_preproc
 

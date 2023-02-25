@@ -1,4 +1,3 @@
-from researcher.embeddings import Embeddings, embeddings_encode, embeddings_kmeans
 from researcher.parser.parse import (
     arxiv_search,
     extract_paper,
@@ -7,7 +6,12 @@ from researcher.parser.parse import (
     parser,
     serpapi_search,
 )
-from researcher.viz import decompose_funcs, visualization_plotly
+from researcher.representations.embeddings import (
+    Embeddings,
+    embeddings_encode,
+    vector_kmeans,
+)
+from researcher.viz import decompose_funcs, scatterplot
 
 __all__ = [
     "arxiv_search",
@@ -18,7 +22,7 @@ __all__ = [
     "serpapi_search",
     "Embeddings",
     "embeddings_encode",
-    "embeddings_kmeans",
+    "vector_kmeans",
     "decompose_funcs",
-    "visualization_plotly",
+    "scatterplot",
 ]
