@@ -23,15 +23,15 @@ model_mapping = {
 
 
 def upload_sidebar(current_out_file):
-    with st.expander("Want to add a new Paper?"):
-        uploaded_file = st.file_uploader("Upload a Paper's PDF", type="pdf")
-        if uploaded_file is not None:
-            st.write("File uploaded!")
+    # with st.expander("Want to add a new Paper?"):
+    #     uploaded_file = st.file_uploader("Upload a Paper's PDF", type="pdf")
+    #     if uploaded_file is not None:
+    #         st.write("File uploaded!")
 
-            # parse PDF and extract paper
-            result = extract_paper(uploaded_file.name, "papers.json")
+    #         # parse PDF and extract paper
+    #         result = extract_paper(uploaded_file.name, "papers.json")
 
-            add_to_json(result, current_out_file)
+    #         add_to_json(result, current_out_file)
 
     with open(current_out_file, "r") as f:
         papers = json.load(f)
@@ -149,7 +149,7 @@ def visualization_sidebar(model, embeddings=None, data=None):
 
         mod = st.selectbox(
             "Clustering Algorithm",
-            ["K-Means", "DBSCAN", "Agglomerative Clustering"],
+            ["K-Means", "Agglomerative Clustering"],
             help="Algorithm used to cluster the embeddings",
         )
 
@@ -167,31 +167,13 @@ def visualization_sidebar(model, embeddings=None, data=None):
             )
             clustering_args["n_clusters"] = n_clusters
 
-        if mod == "DBSCAN":
-            eps = st.slider(
-                "eps",
-                0.0,
-                1.0,
-                value=0.5,
-                help="The maximum distance between two samples for one to be considered as in the neighborhood of the other",
-            )
-            min_samples = st.slider(
-                "min_samples",
-                1,
-                10,
-                value=4,
-                help="The number of samples (or total weight) in a neighborhood for a point to be considered as a core point",
-            )
-            clustering_args["eps"] = eps
-            clustering_args["min_samples"] = min_samples
-
         if mod == "Agglomerative Clustering":
             n_clusters = st.slider(
                 "n_clusters", 1, 10, value=4, help="The number of clusters to find"
             )
-            affinity = st.selectbox(
-                "affinity",
-                ["euclidean", "l1", "l2", "manhattan", "cosine", "precomputed"],
+            metric = st.selectbox(
+                "metric",
+                ["euclidean", "l1", "l2", "manhattan", "cosine"],
                 help="Metric used to compute the linkage",
             )
             linkage = st.selectbox(
@@ -200,7 +182,7 @@ def visualization_sidebar(model, embeddings=None, data=None):
                 help="Which linkage criterion to use",
             )
             clustering_args["n_clusters"] = n_clusters
-            clustering_args["affinity"] = affinity
+            clustering_args["metric"] = metric
             clustering_args["linkage"] = linkage
 
         logging.info(
@@ -213,3 +195,29 @@ def visualization_sidebar(model, embeddings=None, data=None):
         data["cluster_assignment"] = cluster_assignment.tolist()
 
     return cluster_method, decompose_method
+
+
+def load_sidebar(data, current_out_file):
+    papers = upload_sidebar(current_out_file)
+
+    sentences = [paper["abstract"] for paper in papers]
+    data["sentences"] = sentences
+    data["title"] = [paper["title"] for paper in papers]
+
+    st.title("Pipeline Configuration")
+
+    use_preproc = preprocess_sidebar(sentences, data)
+    model, model_name = embeddings_sidebar(
+        sentences=data["sentences"],
+        sentences_processed=data["sentences_processed"],
+        use_preproc=use_preproc,
+        data=data,
+    )
+    cluster_method, decompose_method = visualization_sidebar(model=model, data=data)
+
+    data.papers = papers
+    data.use_preproc = use_preproc
+    data.cluster_method = cluster_method
+    data.decompose_method = decompose_method
+    data.model_name = model_name
+    return data, model
