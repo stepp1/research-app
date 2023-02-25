@@ -96,6 +96,7 @@ def load_vectorstore(source="abstract"):
 
     # check if we already have the vectorstore saved
     # this is done by hardcoding hashses in a file
+    load_dotenv()
     if file_hash in open("./vectorstore/hashes").read():
         return FAISS.load_local(f"./vectorstore/{file_hash}", OpenAIEmbeddings())
 
@@ -111,7 +112,6 @@ def load_vectorstore(source="abstract"):
 
         texts = text_splitter.split_text(saved_file)
 
-        load_dotenv()
         vectorstore = FAISS.from_texts(texts, OpenAIEmbeddings())
         Path(f"./vectorstore/{file_hash}").mkdir(parents=True, exist_ok=True)
         vectorstore.save_local(f"./vectorstore/{file_hash}")
