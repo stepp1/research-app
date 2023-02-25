@@ -21,6 +21,7 @@ Author: @stepp1
   - App: move to a more flexible framework (e.g. Flask)
   - App: hide sidebar when not in use
   - App: add a "per paper" chat w/ pdf viewer
+  - Testing: add tests for data processing, embeddings, etc.
 
 # Installation
 1. Clone the repository
