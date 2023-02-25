@@ -4,10 +4,11 @@ An app that aims to organize your research: *A Researcher with a Paper Based App
 Author: @stepp1
 
 
-<center> <img src="./app/assets/images/app-short.png" width="1000px"></img></center>
-<center> <img src="./app/assets/images/paper-explorer.png" width="1000px"></img></center>
-<center> <img src="./app/assets/images/chat.png" width="1000px"></img></center>
+<center> <img src="./app/assets/images/app.png" width="1000px"></img></center>
 
+Currently, the app supports the following features:
+
+<center> <img src="./app/assets/images/tools.png" width="200px"></img></center>
 
 
 # Table of Contents

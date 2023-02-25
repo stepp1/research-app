@@ -22,7 +22,7 @@ st.markdown(
 
 st.markdown(
     """
-    ### This app is a collection of tools for researchers to explore, chat, and write papers.
+    ### This app is a collection of tools for researchers to explore and understand their papers.
     """,
 )
 
@@ -85,7 +85,7 @@ pages = {
     "👋 Hello": "👋_Hello.py",
     "🔎 PaperExplorer": "🔎_PaperExplorer.py",
     "📚 LibraryChat": "📚_LibraryChat.py",
-    "🦜 PaperChat": "🦜_PaperChat.py",
+    # "🦜 PaperChat": "🦜_PaperChat.py",
     # "📚 PaperLibrary": "📚_PaperLibrary.py",
     # "📊 PaperMetrics": "📊_PaperMetrics.py",
     # "📈 PaperTrends": "📈_PaperTrends.py",
@@ -93,7 +93,7 @@ pages = {
 }
 
 apps = list(pages.keys())[1:]
-apps_list = " ".join([app for app in apps])
+apps_list = "<br /><br />".join([app for app in apps])
 
 
 if st.session_state.source == "default":
