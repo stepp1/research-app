@@ -42,20 +42,19 @@ def arxiv_search(query: str):
             update_time = result.updated.date()
             comments = result.comment
 
+        paper = {
+            "id": paper_id,
+            "title": paper_title,
+            "url": paper_url,
+            "abstract": paper_abstract,
+            "authors": paper_authors,
+            "first_author": paper_first_author,
+        }
+        return paper
+
     except Exception as e:
         logging.error(f"Error while parsing arxiv results: {e}")
         return None
-
-    paper = {
-        "id": paper_id,
-        "title": paper_title,
-        "url": paper_url,
-        "abstract": paper_abstract,
-        "authors": paper_authors,
-        "first_author": paper_first_author,
-    }
-
-    return paper
 
 
 def serpapi_search(query: str):
