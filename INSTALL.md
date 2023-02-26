@@ -11,10 +11,8 @@ git clone git@github.com:stepp1/research-app.git
 
 And create a `.env` file that holds our API keys:
 ```bash
-touch .env
-# Add the following lines to the file
-HUGGINGFACEHUB_API_TOKEN = hf_...
-OPENAI_API_KEY = sk-...
+echo -e "HUGGINGFACEHUB_API_TOKEN = hf_...
+OPENAI_API_KEY = sk-..." > .env
 ```
 
 ## On your machine
