@@ -3,24 +3,27 @@ An app that aims to organize your research: *A Researcher with a Paper Based App
 
 Author: @stepp1
 
+DISCLAIMER: This is a work in progress and an app that I worked for two weeks and wanted to an MVP fast. Any feedback is welcome!
 
 <center> <img src="./app/assets/images/app.png" width="1000px"></img></center>
 
 Currently, the app supports the following features:
 
-<center> <img src="./app/assets/images/tools.png" width="200px"></img></center>
-
+* 📚 LibraryChat: a chatbot that helps you understand a collection of papers. Powered by [🦜️🔗 LangChain](https://github.com/hwchase17/langchain), 
+[🤗 Hugging Face Instructor](https://huggingface.co/), and [🤖 OpenAI](https://openai.com/).
+* 🔎 PaperExplorer: a tool to explore papers in your library. Powered by [🤗 Hugging Face Instructor](https://huggingface.co/) and [Plotly](https://plotly.com/).
 
 # Table of Contents
 - [Status](#status)
 - [Installation](#installation)
 
 # Status
-- TODOs:
-  - Improve: full text extraction
-  - Improve: data pipelines
-  - App: decide if re-implement in a more flexible framework (e.g. Flask or FastAPI)
-  - App: add a "per paper" chat w/ pdf viewer
+* TODOs:
+  - Add: PaperChat: a chatbot that helps you understand a single paper
+  - Improve: Full Text Extraction
+  - Improve: Data Pipelines
+  - App: Decide if re-implement in a more flexible framework (e.g. Flask or FastAPI)
+  - App: Include pdf viewer when clicking on a paper
   - Testing: add tests for data processing, embeddings, etc.
 
 # Installation
