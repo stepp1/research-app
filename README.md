@@ -3,7 +3,12 @@ An app that aims to organize your research: *A Researcher with a Paper Based App
 
 > Author: @stepp1
 > 
-> DISCLAIMER: This is a WIP. I worked on it for two weeks and wanted to have an MVP fast. Any feedback is welcome!
+> 
+> 🚨 DISCLAIMER: 
+> 
+> This is a WIP. I worked on it for two weeks and wanted to have an MVP fast. When I started it, I didn't have any experience with Streamlit nor LangChain.
+> 
+> Any feedback is welcome!
 
 <center> <img src="./app/assets/images/app.png" width="1000px"></img></center>
 
