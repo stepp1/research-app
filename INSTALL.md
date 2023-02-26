@@ -2,7 +2,7 @@
 
 I've always ran into problems when installing from an environtment.yml. Specially, when running in a Docker container.
 
-Therefore, I'm going to list the steps I took to install the environment.
+Therefore, here's a list of the steps I took to install the environment.
 
 First let's clone the repository:
 ```bash
@@ -22,7 +22,10 @@ OPENAI_API_KEY = sk-...
 1. Install Mambaforge
 
 ```
-...
+wget "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh" && \
+    bash Mambaforge-$(uname)-$(uname -m).sh -b && \
+    ~/mambaforge/condabin/conda init && \
+    rm Mambaforge-$(uname)-$(uname -m).sh
 ```
 
 2. Create and activate an environment
@@ -45,7 +48,9 @@ mamba install jupyterlab ipykernel nbformat -y
 
 5. Running the app
 ```bash
-streamlit run app.py
+PYTHONPATH=. streamlit run app/👋_Hello.py
+# or
+bash run.sh
 ```
 
 6. Open the app in your browser
@@ -55,7 +60,7 @@ http://localhost:8501
 
 ## On a Docker Container
 
-We provide a Dockerfile to build and run the app.
+I provided a Dockerfile to build and run the app.
 
 1. Build the image
 ```bash
