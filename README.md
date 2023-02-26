@@ -64,7 +64,7 @@ We provide a `dataset.json` file stored at `researcher/data/` that contains meta
 
 > Full dataset is currently hosted on Zenodo: https://zenodo.org/record/7653458
 > 
-> More information about the dataset can be found in [DATA](./reseacher/data/README.md) file.
+> More information about the dataset can be found [here](./reseacher/data/README.md).
 
 ## Download the dataset
 
