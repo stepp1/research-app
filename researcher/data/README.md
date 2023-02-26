@@ -12,7 +12,7 @@ The `dataset.json` contains the metadata of the papers:
 
 ## Preprocessing
 
-We provide multiple scripts to preprocess data.
+I provided some scripts for preprocessing.
 
 - Extract images from PDFs `utils/img2txt.py`
 - Extract text from the images: `utils/img2txt.py`
