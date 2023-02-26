@@ -58,25 +58,29 @@ def extract_from_dataset(dataset: dict, output_folder=None) -> List[str]:
     all_images = []
     for data in tqdm(dataset):
         if not Path(data["file"]).exists():
-            print(f"File not found: {data['file']}")
+            logging.warning(f"File {data['file']} does not exist")
             continue
 
         # if image_path is not specified, create correct path
         # researcher/data/jpg/ Path(data["file"]).stem
-        if "image_path" not in data and output_folder is None:
+        if "image_folder" not in data and output_folder is None:
             data["image_folder"] = str(
                 Path(data["file"]).parent.parent / "jpg" / Path(data["file"]).stem
             )
-        elif "image_path" not in data and output_folder is not None:
+        elif "image_folder" not in data and output_folder is not None:
             data["image_folder"] = str(
                 Path(output_folder) / "jpg" / Path(data["file"]).stem
             )
 
+        # create image folder
+        Path(data["image_folder"]).mkdir(exist_ok=True, parents=True)
+
         # remove old images
-        for image in Path(data["image_path"]).glob("*.jpg"):
+        for image in Path(data["image_folder"]).glob("*.jpg"):
             image.unlink()
 
-        images = extract_from_pdf(data["file"], data["image_path"])
+        logging.info(f"Extracting images from {data['file']} to {data['image_folder']}")
+        images = extract_from_pdf(data["file"], data["image_folder"])
 
         # set images list
         data["images"] = [str(image.filename) for image in images]

@@ -49,11 +49,43 @@ class PDFExtractor:
                         break
             break
 
-    def extract(self):
+    def get_content(self):
+        pages = []
+        for page in PDFPage.get_pages(
+            self.current_fh, self.pagenos, caching=True, check_extractable=True
+        ):
+            self.interpreter.process_page(page)
+            text = self.outfp.getvalue()
+
+            new_text = []
+            for line in text.splitlines():
+                line = process_ascii(line)
+                if len(line) > 3 and not check_publisher(line):
+                    new_text.append(line)
+            pages.append("\n".join(new_text))
+
+        return pages
+
+    def extract(self, only_metadata=True):
         with open(self.pdf_path, "rb") as fh:
             self.current_fh = fh
             self.get_metadata()
 
+            if only_metadata:
+                self.close()
+                return self.title, self.next_line
+
+            pages = self.get_content()
+
+        self.close()
+        out = {
+            "title": self.title,
+            "next_line": self.next_line,
+            "pages": pages,
+        }
+
+        return out
+
+    def close(self):
         self.device.close()
         self.outfp.close()
-        return self.title, self.next_line
