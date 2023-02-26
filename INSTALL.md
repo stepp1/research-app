@@ -23,9 +23,7 @@ OPENAI_API_KEY = sk-...
 
 ```
 wget "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh" && \
-    bash Mambaforge-$(uname)-$(uname -m).sh -b && \
-    ~/mambaforge/condabin/conda init && \
-    rm Mambaforge-$(uname)-$(uname -m).sh
+    bash Mambaforge-$(uname)-$(uname -m).sh
 ```
 
 2. Create and activate an environment
