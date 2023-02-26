@@ -1,9 +1,9 @@
 # Researcher App
 An app that aims to organize your research: *A Researcher with a Paper Based Approach*
 
-Author: @stepp1
-
-DISCLAIMER: This is a WIP. I worked on it for two weeks and wanted to have an MVP fast. Any feedback is welcome!
+> Author: @stepp1
+> 
+> DISCLAIMER: This is a WIP. I worked on it for two weeks and wanted to have an MVP fast. Any feedback is welcome!
 
 <center> <img src="./app/assets/images/app.png" width="1000px"></img></center>
 
