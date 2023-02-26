@@ -10,8 +10,8 @@ DISCLAIMER: This is a work in progress and an app that I worked for two weeks an
 Currently, the app supports the following features:
 
 * 📚 LibraryChat: a chatbot that helps you understand a collection of papers. Powered by [🦜️🔗 LangChain](https://github.com/hwchase17/langchain), 
-[🤗 Hugging Face Instructor](https://huggingface.co/), and [🤖 OpenAI](https://openai.com/).
-* 🔎 PaperExplorer: a tool to explore papers in your library. Powered by [🤗 Hugging Face Instructor](https://huggingface.co/) and [Plotly](https://plotly.com/).
+[🤗 Hugging Face Instructor](https://huggingface.co/hkunlp/instructor-large), and [🤖 OpenAI](https://openai.com/).
+* 🔎 PaperExplorer: a tool to explore papers in your library. Powered by [🤗 Hugging Face Instructor](https://huggingface.co/hkunlp/instructor-large) and [Plotly](https://plotly.com/).
 
 # Table of Contents
 - [Status](#status)
