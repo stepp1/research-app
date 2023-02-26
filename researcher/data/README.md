@@ -1,6 +1,6 @@
 # Data
 
-## Data Card
+## Dataset Metadata
 
 The `dataset.json` contains the metadata of the papers:
   - `title`: title of the paper
