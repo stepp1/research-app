@@ -60,11 +60,11 @@ Remember to forward the port for streamlit if you are running it on a server!
 
 # Dataset
 
-We provide a `dataset.json` file stored at `researcher/data/` that contains the metadata of the papers.
+We provide a `dataset.json` file stored at `researcher/data/` that contains metadata for the default papers.
 
-Full dataset is currently hosted on Zenodo: https://zenodo.org/record/7653458
-
-More information about the dataset can be found in the [DATA.md](./DATA.md) file.
+> Full dataset is currently hosted on Zenodo: https://zenodo.org/record/7653458
+> 
+> More information about the dataset can be found in the [DATA.md](./DATA.md) file.
 
 ## Download the dataset
 
